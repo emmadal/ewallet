@@ -11,7 +11,10 @@ const OnboardingPhone = ({theme, navigation}) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>Bienvenue sur votre application Wallet</Text>
+      <Text style={styles.header}>Bienvenue sur eWallet</Text>
+      <Text style={styles.subtitle}>
+        Veuillez entre votre numéro de telephone
+      </Text>
       <PhoneInput
         ref={phoneInput}
         defaultValue={phoneValue}
@@ -55,6 +58,10 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 23,
     fontFamily: 'ProductSans-Bold',
+  },
+  subtitle: {
+    textAlign: 'center',
+    fontFamily: 'ProductSans-Light',
   },
   btn: {
     width: Dimensions.get('window').width / 2,

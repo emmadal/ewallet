@@ -53,7 +53,7 @@
 	<false/>
 	<key>UIAppFonts</key>
 	<array>
-		<string>AntDesign.ttf</string>
+	<string>AntDesign.ttf</string>
 		<string>Entypo.ttf</string>
 		<string>EvilIcons.ttf</string>
 		<string>Feather.ttf</string>
@@ -61,14 +61,19 @@
 		<string>FontAwesome5_Brands.ttf</string>
 		<string>FontAwesome5_Regular.ttf</string>
 		<string>FontAwesome5_Solid.ttf</string>
-		<string>Fontisto.ttf</string>
 		<string>Foundation.ttf</string>
 		<string>Ionicons.ttf</string>
-		<string>MaterialCommunityIcons.ttf</string>
 		<string>MaterialIcons.ttf</string>
-		<string>Octicons.ttf</string>
+		<string>MaterialCommunityIcons.ttf</string>
 		<string>SimpleLineIcons.ttf</string>
+		<string>Octicons.ttf</string>
 		<string>Zocial.ttf</string>
+		<string>Fontisto.ttf</string>
+		<string>ProductSans-Bold.ttf</string>
+		<string>ProductSans-Light.ttf</string>
+		<string>ProductSans-Medium.ttf</string>
+		<string>ProductSans-Regular.ttf</string>
+		<string>ProductSans-Thin.ttf</string>
 	</array>
 </dict>
 </plist>

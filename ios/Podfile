@@ -13,7 +13,7 @@ target 'Crypto' do
   )
 
   pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
-  
+
   target 'CryptoTests' do
     inherit! :complete
     # Pods for testing
