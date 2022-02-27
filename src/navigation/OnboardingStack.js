@@ -5,6 +5,7 @@ import OnboardingUserName from '../screens/OnboardingUserName';
 import OnboardingPhone from '../screens/OnboardingPhone';
 import Onboarding from '../screens/Onboarding';
 import Login from '../screens/Login';
+import Home from '../screens/Home';
 
 const Stack = createNativeStackNavigator();
 
@@ -53,6 +54,13 @@ const OnboardingStack = () => {
           headerTitleStyle: {
             fontFamily: 'ProductSans-Medium',
           },
+        }}
+      />
+      <Stack.Screen
+        name="Home"
+        component={Home}
+        options={{
+          headerShown: false,
         }}
       />
     </Stack.Navigator>

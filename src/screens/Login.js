@@ -1,14 +1,16 @@
 import React, {useState} from 'react';
 import {View, StyleSheet, Dimensions} from 'react-native';
 import {Text, withTheme, Button, TextInput} from 'react-native-paper';
+import {useNavigation} from '@react-navigation/native';
 import * as regex from '../constants/regex';
 
 const Login = ({theme}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const {colors} = theme;
+  const {navigate} = useNavigation();
 
-  const handleLogin = () => console.log('Se connecter');
+  const handleLogin = () => navigate('Home');
 
   return (
     <View style={styles.container}>
