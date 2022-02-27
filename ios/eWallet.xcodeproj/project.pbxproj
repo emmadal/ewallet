@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		00E356F31AD99517003FC87E /* CryptoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* CryptoTests.m */; };
+		00E356F31AD99517003FC87E /* eWalletTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* eWalletTests.m */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
@@ -16,8 +16,8 @@
 		64A9F92FEFCF4C889CE4DD8B /* ProductSans-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FC2B27CA4CF74607A71F90D5 /* ProductSans-Medium.ttf */; };
 		731E3B5FD7F144FCB455EEAC /* ProductSans-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 292D316F07CF466CB9283128 /* ProductSans-Thin.ttf */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
-		A1E82ADD0E3F845633D66F61 /* libPods-Crypto-CryptoTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 880E6081A8CFA646D11353C3 /* libPods-Crypto-CryptoTests.a */; };
-		D49DAC824B790522D406F2AF /* libPods-Crypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AA1B6C849CDC67326B8ED202 /* libPods-Crypto.a */; };
+		A1E82ADD0E3F845633D66F61 /* libPods-eWallet-eWalletTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 880E6081A8CFA646D11353C3 /* libPods-eWallet-eWalletTests.a */; };
+		D49DAC824B790522D406F2AF /* libPods-eWallet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AA1B6C849CDC67326B8ED202 /* libPods-eWallet.a */; };
 		ECB6DFB65BE34B6EB708C25C /* ProductSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5E0E3B19436E4061B883627B /* ProductSans-Regular.ttf */; };
 		F1E180021545449E99886140 /* ProductSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 85BB88FDC9074B059E6F3D17 /* ProductSans-Bold.ttf */; };
 /* End PBXBuildFile section */
@@ -28,32 +28,32 @@
 			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 13B07F861A680F5B00A75B9A;
-			remoteInfo = Crypto;
+			remoteInfo = eWallet;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		00E356EE1AD99517003FC87E /* CryptoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CryptoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		00E356EE1AD99517003FC87E /* eWalletTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = eWalletTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		00E356F21AD99517003FC87E /* CryptoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CryptoTests.m; sourceTree = "<group>"; };
-		13B07F961A680F5B00A75B9A /* Crypto.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Crypto.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = Crypto/AppDelegate.h; sourceTree = "<group>"; };
-		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = Crypto/AppDelegate.m; sourceTree = "<group>"; };
-		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Crypto/Images.xcassets; sourceTree = "<group>"; };
-		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Crypto/Info.plist; sourceTree = "<group>"; };
-		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Crypto/main.m; sourceTree = "<group>"; };
+		00E356F21AD99517003FC87E /* eWalletTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = eWalletTests.m; sourceTree = "<group>"; };
+		13B07F961A680F5B00A75B9A /* eWallet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = eWallet.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = eWallet/AppDelegate.h; sourceTree = "<group>"; };
+		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = eWallet/AppDelegate.m; sourceTree = "<group>"; };
+		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = eWallet/Images.xcassets; sourceTree = "<group>"; };
+		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = eWallet/Info.plist; sourceTree = "<group>"; };
+		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = eWallet/main.m; sourceTree = "<group>"; };
 		292D316F07CF466CB9283128 /* ProductSans-Thin.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "ProductSans-Thin.ttf"; path = "../src/assets/fonts/ProductSans-Thin.ttf"; sourceTree = "<group>"; };
 		476ACC1D27C5DB4200BAC406 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		49C89490CF864BB175A86FA0 /* Pods-Crypto.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Crypto.release.xcconfig"; path = "Target Support Files/Pods-Crypto/Pods-Crypto.release.xcconfig"; sourceTree = "<group>"; };
-		4BB8C44C94217EF9BEF701C7 /* Pods-Crypto.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Crypto.debug.xcconfig"; path = "Target Support Files/Pods-Crypto/Pods-Crypto.debug.xcconfig"; sourceTree = "<group>"; };
+		49C89490CF864BB175A86FA0 /* Pods-eWallet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-eWallet.release.xcconfig"; path = "Target Support Files/Pods-eWallet/Pods-eWallet.release.xcconfig"; sourceTree = "<group>"; };
+		4BB8C44C94217EF9BEF701C7 /* Pods-eWallet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-eWallet.debug.xcconfig"; path = "Target Support Files/Pods-eWallet/Pods-eWallet.debug.xcconfig"; sourceTree = "<group>"; };
 		5E0E3B19436E4061B883627B /* ProductSans-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "ProductSans-Regular.ttf"; path = "../src/assets/fonts/ProductSans-Regular.ttf"; sourceTree = "<group>"; };
-		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = Crypto/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = eWallet/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		85BB88FDC9074B059E6F3D17 /* ProductSans-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "ProductSans-Bold.ttf"; path = "../src/assets/fonts/ProductSans-Bold.ttf"; sourceTree = "<group>"; };
-		880E6081A8CFA646D11353C3 /* libPods-Crypto-CryptoTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Crypto-CryptoTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		99B2426AE126A764282FD256 /* Pods-Crypto-CryptoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Crypto-CryptoTests.debug.xcconfig"; path = "Target Support Files/Pods-Crypto-CryptoTests/Pods-Crypto-CryptoTests.debug.xcconfig"; sourceTree = "<group>"; };
-		AA1B6C849CDC67326B8ED202 /* libPods-Crypto.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Crypto.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		880E6081A8CFA646D11353C3 /* libPods-eWallet-eWalletTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-eWallet-eWalletTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		99B2426AE126A764282FD256 /* Pods-eWallet-eWalletTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-eWallet-eWalletTests.debug.xcconfig"; path = "Target Support Files/Pods-eWallet-eWalletTests/Pods-eWallet-eWalletTests.debug.xcconfig"; sourceTree = "<group>"; };
+		AA1B6C849CDC67326B8ED202 /* libPods-eWallet.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-eWallet.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA8BC085575F488ABB03D797 /* ProductSans-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "ProductSans-Light.ttf"; path = "../src/assets/fonts/ProductSans-Light.ttf"; sourceTree = "<group>"; };
-		E3DEE05B508CCD440FDBAD02 /* Pods-Crypto-CryptoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Crypto-CryptoTests.release.xcconfig"; path = "Target Support Files/Pods-Crypto-CryptoTests/Pods-Crypto-CryptoTests.release.xcconfig"; sourceTree = "<group>"; };
+		E3DEE05B508CCD440FDBAD02 /* Pods-eWallet-eWalletTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-eWallet-eWalletTests.release.xcconfig"; path = "Target Support Files/Pods-eWallet-eWalletTests/Pods-eWallet-eWalletTests.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		FC2B27CA4CF74607A71F90D5 /* ProductSans-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "ProductSans-Medium.ttf"; path = "../src/assets/fonts/ProductSans-Medium.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -63,7 +63,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A1E82ADD0E3F845633D66F61 /* libPods-Crypto-CryptoTests.a in Frameworks */,
+				A1E82ADD0E3F845633D66F61 /* libPods-eWallet-eWalletTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -71,20 +71,20 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D49DAC824B790522D406F2AF /* libPods-Crypto.a in Frameworks */,
+				D49DAC824B790522D406F2AF /* libPods-eWallet.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		00E356EF1AD99517003FC87E /* CryptoTests */ = {
+		00E356EF1AD99517003FC87E /* eWalletTests */ = {
 			isa = PBXGroup;
 			children = (
-				00E356F21AD99517003FC87E /* CryptoTests.m */,
+				00E356F21AD99517003FC87E /* eWalletTests.m */,
 				00E356F01AD99517003FC87E /* Supporting Files */,
 			);
-			path = CryptoTests;
+			path = eWalletTests;
 			sourceTree = "<group>";
 		};
 		00E356F01AD99517003FC87E /* Supporting Files */ = {
@@ -95,7 +95,7 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		13B07FAE1A68108700A75B9A /* Crypto */ = {
+		13B07FAE1A68108700A75B9A /* eWallet */ = {
 			isa = PBXGroup;
 			children = (
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
@@ -105,16 +105,16 @@
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
 			);
-			name = Crypto;
+			name = eWallet;
 			sourceTree = "<group>";
 		};
 		25BBD16320C469CF396C2058 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				4BB8C44C94217EF9BEF701C7 /* Pods-Crypto.debug.xcconfig */,
-				49C89490CF864BB175A86FA0 /* Pods-Crypto.release.xcconfig */,
-				99B2426AE126A764282FD256 /* Pods-Crypto-CryptoTests.debug.xcconfig */,
-				E3DEE05B508CCD440FDBAD02 /* Pods-Crypto-CryptoTests.release.xcconfig */,
+				4BB8C44C94217EF9BEF701C7 /* Pods-eWallet.debug.xcconfig */,
+				49C89490CF864BB175A86FA0 /* Pods-eWallet.release.xcconfig */,
+				99B2426AE126A764282FD256 /* Pods-eWallet-eWalletTests.debug.xcconfig */,
+				E3DEE05B508CCD440FDBAD02 /* Pods-eWallet-eWalletTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -123,8 +123,8 @@
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				AA1B6C849CDC67326B8ED202 /* libPods-Crypto.a */,
-				880E6081A8CFA646D11353C3 /* libPods-Crypto-CryptoTests.a */,
+				AA1B6C849CDC67326B8ED202 /* libPods-eWallet.a */,
+				880E6081A8CFA646D11353C3 /* libPods-eWallet-eWalletTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -140,9 +140,9 @@
 			isa = PBXGroup;
 			children = (
 				476ACC1D27C5DB4200BAC406 /* GoogleService-Info.plist */,
-				13B07FAE1A68108700A75B9A /* Crypto */,
+				13B07FAE1A68108700A75B9A /* eWallet */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
-				00E356EF1AD99517003FC87E /* CryptoTests */,
+				00E356EF1AD99517003FC87E /* eWalletTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				25BBD16320C469CF396C2058 /* Pods */,
@@ -156,8 +156,8 @@
 		83CBBA001A601CBA00E9B192 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				13B07F961A680F5B00A75B9A /* Crypto.app */,
-				00E356EE1AD99517003FC87E /* CryptoTests.xctest */,
+				13B07F961A680F5B00A75B9A /* eWallet.app */,
+				00E356EE1AD99517003FC87E /* eWalletTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -178,9 +178,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		00E356ED1AD99517003FC87E /* CryptoTests */ = {
+		00E356ED1AD99517003FC87E /* eWalletTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "CryptoTests" */;
+			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "eWalletTests" */;
 			buildPhases = (
 				3033D32B3FDDF19839618E00 /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
@@ -194,14 +194,14 @@
 			dependencies = (
 				00E356F51AD99517003FC87E /* PBXTargetDependency */,
 			);
-			name = CryptoTests;
-			productName = CryptoTests;
-			productReference = 00E356EE1AD99517003FC87E /* CryptoTests.xctest */;
+			name = eWalletTests;
+			productName = eWalletTests;
+			productReference = 00E356EE1AD99517003FC87E /* eWalletTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		13B07F861A680F5B00A75B9A /* Crypto */ = {
+		13B07F861A680F5B00A75B9A /* eWallet */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "Crypto" */;
+			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "eWallet" */;
 			buildPhases = (
 				82A7794EFCFE148C8C5C563A /* [CP] Check Pods Manifest.lock */,
 				FD10A7F022414F080027D42C /* Start Packager */,
@@ -217,9 +217,9 @@
 			);
 			dependencies = (
 			);
-			name = Crypto;
-			productName = Crypto;
-			productReference = 13B07F961A680F5B00A75B9A /* Crypto.app */;
+			name = eWallet;
+			productName = eWallet;
+			productReference = 13B07F961A680F5B00A75B9A /* eWallet.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -239,7 +239,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "Crypto" */;
+			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "eWallet" */;
 			compatibilityVersion = "Xcode 12.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -252,8 +252,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				13B07F861A680F5B00A75B9A /* Crypto */,
-				00E356ED1AD99517003FC87E /* CryptoTests */,
+				13B07F861A680F5B00A75B9A /* eWallet */,
+				00E356ED1AD99517003FC87E /* eWalletTests */,
 			);
 		};
 /* End PBXProject section */
@@ -326,7 +326,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Crypto-CryptoTests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-eWallet-eWalletTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -339,15 +339,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Crypto-CryptoTests/Pods-Crypto-CryptoTests-resources-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-eWallet-eWalletTests/Pods-eWallet-eWalletTests-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Crypto-CryptoTests/Pods-Crypto-CryptoTests-resources-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-eWallet-eWalletTests/Pods-eWallet-eWalletTests-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Crypto-CryptoTests/Pods-Crypto-CryptoTests-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-eWallet-eWalletTests/Pods-eWallet-eWalletTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		7ABF5E77BE844CBC108B83C8 /* [CP] Embed Pods Frameworks */ = {
@@ -356,15 +356,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Crypto/Pods-Crypto-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-eWallet/Pods-eWallet-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Crypto/Pods-Crypto-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-eWallet/Pods-eWallet-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Crypto/Pods-Crypto-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-eWallet/Pods-eWallet-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		82A7794EFCFE148C8C5C563A /* [CP] Check Pods Manifest.lock */ = {
@@ -382,7 +382,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Crypto-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-eWallet-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -395,15 +395,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Crypto/Pods-Crypto-resources-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-eWallet/Pods-eWallet-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Crypto/Pods-Crypto-resources-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-eWallet/Pods-eWallet-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Crypto/Pods-Crypto-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-eWallet/Pods-eWallet-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		E144204FBFDB99C7D333711C /* [CP] Embed Pods Frameworks */ = {
@@ -412,15 +412,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Crypto-CryptoTests/Pods-Crypto-CryptoTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-eWallet-eWalletTests/Pods-eWallet-eWalletTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Crypto-CryptoTests/Pods-Crypto-CryptoTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-eWallet-eWalletTests/Pods-eWallet-eWalletTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Crypto-CryptoTests/Pods-Crypto-CryptoTests-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-eWallet-eWalletTests/Pods-eWallet-eWalletTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		FD10A7F022414F080027D42C /* Start Packager */ = {
@@ -449,7 +449,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				00E356F31AD99517003FC87E /* CryptoTests.m in Sources */,
+				00E356F31AD99517003FC87E /* eWalletTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -467,7 +467,7 @@
 /* Begin PBXTargetDependency section */
 		00E356F51AD99517003FC87E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 13B07F861A680F5B00A75B9A /* Crypto */;
+			target = 13B07F861A680F5B00A75B9A /* eWallet */;
 			targetProxy = 00E356F41AD99517003FC87E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -475,14 +475,14 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 99B2426AE126A764282FD256 /* Pods-Crypto-CryptoTests.debug.xcconfig */;
+			baseConfigurationReference = 99B2426AE126A764282FD256 /* Pods-eWallet-eWalletTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = CryptoTests/Info.plist;
+				INFOPLIST_FILE = eWalletTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -496,17 +496,17 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Crypto.app/Crypto";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/eWallet.app/eWallet";
 			};
 			name = Debug;
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E3DEE05B508CCD440FDBAD02 /* Pods-Crypto-CryptoTests.release.xcconfig */;
+			baseConfigurationReference = E3DEE05B508CCD440FDBAD02 /* Pods-eWallet-eWalletTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
-				INFOPLIST_FILE = CryptoTests/Info.plist;
+				INFOPLIST_FILE = eWalletTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -520,19 +520,19 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Crypto.app/Crypto";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/eWallet.app/eWallet";
 			};
 			name = Release;
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4BB8C44C94217EF9BEF701C7 /* Pods-Crypto.debug.xcconfig */;
+			baseConfigurationReference = 4BB8C44C94217EF9BEF701C7 /* Pods-eWallet.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_BITCODE = NO;
-				INFOPLIST_FILE = Crypto/Info.plist;
+				INFOPLIST_FILE = eWallet/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -542,8 +542,8 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.crypto;
-				PRODUCT_NAME = Crypto;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ewallet;
+				PRODUCT_NAME = eWallet;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -552,12 +552,12 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 49C89490CF864BB175A86FA0 /* Pods-Crypto.release.xcconfig */;
+			baseConfigurationReference = 49C89490CF864BB175A86FA0 /* Pods-eWallet.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				INFOPLIST_FILE = Crypto/Info.plist;
+				INFOPLIST_FILE = eWallet/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -567,8 +567,8 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.crypto;
-				PRODUCT_NAME = Crypto;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ewallet;
+				PRODUCT_NAME = eWallet;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -700,7 +700,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "CryptoTests" */ = {
+		00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "eWalletTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				00E356F61AD99517003FC87E /* Debug */,
@@ -709,7 +709,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "Crypto" */ = {
+		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "eWallet" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				13B07F941A680F5B00A75B9A /* Debug */,
@@ -718,7 +718,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "Crypto" */ = {
+		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "eWallet" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				83CBBA201A601CBA00E9B192 /* Debug */,

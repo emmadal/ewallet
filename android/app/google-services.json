@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:825908093856:android:c71b4417686ac4b5823ac5",
         "android_client_info": {
-          "package_name": "com.crypto"
+          "package_name": "com.ewallet"
         }
       },
       "oauth_client": [
@@ -34,7 +34,7 @@
               "client_id": "825908093856-jdu22pb7vrs3f9jp07t4h5r9pdbft6k5.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.crypto"
+                "bundle_id": "com.ewallet"
               }
             }
           ]
