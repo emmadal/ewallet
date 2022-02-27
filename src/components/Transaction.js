@@ -26,8 +26,8 @@ const styles = StyleSheet.create({
   card: {
     marginHorizontal: 15,
     marginVertical: 5,
-    borderRadius: 18,
-    paddingVertical: 8,
+    borderRadius: 9,
+    paddingVertical: 10,
     backgroundColor: Colors.white,
   },
   viewUserInfo: {

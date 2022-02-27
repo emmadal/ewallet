@@ -6,6 +6,7 @@ import OnboardingPhone from '../screens/OnboardingPhone';
 import Onboarding from '../screens/Onboarding';
 import Login from '../screens/Login';
 import Home from '../screens/Home';
+import Settings from '../screens/Settings';
 
 const Stack = createNativeStackNavigator();
 
@@ -61,6 +62,17 @@ const OnboardingStack = () => {
         component={Home}
         options={{
           headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="Settings"
+        component={Settings}
+        options={{
+          headerTitle: 'Réglages',
+          headerBackTitle: 'Retour',
+          headerTitleStyle: {
+            fontFamily: 'ProductSans-Medium',
+          },
         }}
       />
     </Stack.Navigator>

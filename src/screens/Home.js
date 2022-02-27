@@ -1,4 +1,5 @@
 import React from 'react';
+import {useNavigation} from '@react-navigation/native';
 import {
   View,
   StyleSheet,
@@ -13,6 +14,7 @@ import {transactions} from '../data/transactions';
 
 const Home = ({theme}) => {
   const {colors} = theme;
+  const {navigate} = useNavigation();
 
   return (
     <View style={styles.container}>
@@ -26,7 +28,7 @@ const Home = ({theme}) => {
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.icon}
-            onPress={() => console.log('Settings')}>
+            onPress={() => navigate('Settings')}>
             <Icon name="settings" size={25} color={colors.text} />
           </TouchableOpacity>
         </View>
