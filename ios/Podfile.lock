@@ -366,6 +366,9 @@ PODS:
   - Firebase/Messaging (8.12.1):
     - Firebase/CoreOnly
     - FirebaseMessaging (~> 8.12.0)
+  - Firebase/Storage (8.12.1):
+    - Firebase/CoreOnly
+    - FirebaseStorage (~> 8.12.0)
   - FirebaseAuth (8.12.0):
     - FirebaseCore (~> 8.0)
     - GoogleUtilities/AppDelegateSwizzler (~> 7.7)
@@ -375,7 +378,7 @@ PODS:
     - FirebaseCoreDiagnostics (~> 8.0)
     - GoogleUtilities/Environment (~> 7.7)
     - GoogleUtilities/Logger (~> 7.7)
-  - FirebaseCoreDiagnostics (8.12.0):
+  - FirebaseCoreDiagnostics (8.13.0):
     - GoogleDataTransport (~> 9.1)
     - GoogleUtilities/Environment (~> 7.7)
     - GoogleUtilities/Logger (~> 7.7)
@@ -393,7 +396,7 @@ PODS:
     - "gRPC-C++ (~> 1.28.0)"
     - leveldb-library (~> 1.22)
     - nanopb (~> 2.30908.0)
-  - FirebaseInstallations (8.12.0):
+  - FirebaseInstallations (8.13.0):
     - FirebaseCore (~> 8.0)
     - GoogleUtilities/Environment (~> 7.7)
     - GoogleUtilities/UserDefaults (~> 7.7)
@@ -407,6 +410,9 @@ PODS:
     - GoogleUtilities/Reachability (~> 7.7)
     - GoogleUtilities/UserDefaults (~> 7.7)
     - nanopb (~> 2.30908.0)
+  - FirebaseStorage (8.12.0):
+    - FirebaseCore (~> 8.0)
+    - GTMSessionFetcher/Core (~> 1.5)
   - Flipper (0.99.0):
     - Flipper-Folly (~> 2.6)
     - Flipper-RSocket (~> 1.4)
@@ -811,19 +817,23 @@ PODS:
     - React-Core
   - RNCMaskedView (0.2.6):
     - React-Core
-  - RNFBApp (14.5.0):
+  - RNFBApp (14.5.1):
     - Firebase/CoreOnly (= 8.12.1)
     - React-Core
-  - RNFBAuth (14.5.0):
+  - RNFBAuth (14.5.1):
     - Firebase/Auth (= 8.12.1)
     - React-Core
     - RNFBApp
-  - RNFBFirestore (14.5.0):
+  - RNFBFirestore (14.5.1):
     - Firebase/Firestore (= 8.12.1)
     - React-Core
     - RNFBApp
-  - RNFBMessaging (14.5.0):
+  - RNFBMessaging (14.5.1):
     - Firebase/Messaging (= 8.12.1)
+    - React-Core
+    - RNFBApp
+  - RNFBStorage (14.5.1):
+    - Firebase/Storage (= 8.12.1)
     - React-Core
     - RNFBApp
   - RNGestureHandler (2.2.0):
@@ -901,6 +911,7 @@ DEPENDENCIES:
   - "RNFBAuth (from `../node_modules/@react-native-firebase/auth`)"
   - "RNFBFirestore (from `../node_modules/@react-native-firebase/firestore`)"
   - "RNFBMessaging (from `../node_modules/@react-native-firebase/messaging`)"
+  - "RNFBStorage (from `../node_modules/@react-native-firebase/storage`)"
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - RNScreens (from `../node_modules/react-native-screens`)
   - RNVectorIcons (from `../node_modules/react-native-vector-icons`)
@@ -918,6 +929,7 @@ SPEC REPOS:
     - FirebaseFirestore
     - FirebaseInstallations
     - FirebaseMessaging
+    - FirebaseStorage
     - Flipper
     - Flipper-Boost-iOSX
     - Flipper-DoubleConversion
@@ -1016,6 +1028,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-firebase/firestore"
   RNFBMessaging:
     :path: "../node_modules/@react-native-firebase/messaging"
+  RNFBStorage:
+    :path: "../node_modules/@react-native-firebase/storage"
   RNGestureHandler:
     :path: "../node_modules/react-native-gesture-handler"
   RNScreens:
@@ -1036,10 +1050,11 @@ SPEC CHECKSUMS:
   Firebase: 580d09e8edafc3073ebf09c03fd42e4d80d35fe9
   FirebaseAuth: 5250d7bdba35e57cc34ec7ddc525f82b2757f2a0
   FirebaseCore: 8138de860a90ca7eec5e324da5788fb0ebf1d93c
-  FirebaseCoreDiagnostics: 3b40dfadef5b90433a60ae01f01e90fe87aa76aa
+  FirebaseCoreDiagnostics: c2836d254a8f0bbb4121ff18f2c2ea39d118fd08
   FirebaseFirestore: dfeb58916ee3ae0ef2453d4849a683672705920c
-  FirebaseInstallations: 25764cf322e77f99449395870a65b2bef88e1545
+  FirebaseInstallations: 60edbf7e11d91ae4c751d26c200dfd037099abe0
   FirebaseMessaging: 23db8bf05585e929ada8af0f0968933c25252808
+  FirebaseStorage: 4b75458c35d8b728e4c1fc1371942997456ab299
   Flipper: 30e8eeeed6abdc98edaf32af0cda2f198be4b733
   Flipper-Boost-iOSX: fd1e2b8cbef7e662a122412d7ac5f5bea715403c
   Flipper-DoubleConversion: 57ffbe81ef95306cc9e69c4aa3aeeeeb58a6a28c
@@ -1090,10 +1105,11 @@ SPEC CHECKSUMS:
   ReactCommon: 650e33cde4fb7d36781cd3143f5276da0abb2f96
   RNCAsyncStorage: b49b4e38a1548d03b74b30e558a1d18465b94be7
   RNCMaskedView: c298b644a10c0c142055b3ae24d83879ecb13ccd
-  RNFBApp: 06c8447270d295edc431bccd55970d8711a07a42
-  RNFBAuth: e248a56b1d28d3b53b54b72a296cf9270df1d96e
-  RNFBFirestore: 7e4fe3b009a193d2f2fb0a19d1d6ab06355d4a09
-  RNFBMessaging: 8e3575bb0303b43a852bf5decbe99c3272035048
+  RNFBApp: 5bae3002117e55f3c9aa0fb38175dd16c8046c90
+  RNFBAuth: ed314ff1732011c23041570ac4a98bc6070f9f4d
+  RNFBFirestore: 6103ff28c04b6a71faaca286a7f778914c3c7bb4
+  RNFBMessaging: ae6c40883868cd01fa802395174ec7d61cfa0920
+  RNFBStorage: 495f37ba9f233e3be134c8bc0f31ff011a9eecec
   RNGestureHandler: bf572f552ea324acd5b5464b8d30755b2d8c1de6
   RNScreens: 2559f98b0835103cbef3b26ba77fa61d4bb37ae7
   RNVectorIcons: 7923e585eaeb139b9f4531d25a125a1500162a0b

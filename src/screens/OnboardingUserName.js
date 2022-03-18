@@ -1,18 +1,38 @@
 import React, {useState} from 'react';
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, Alert} from 'react-native';
 import {withTheme, Button, TextInput} from 'react-native-paper';
 import * as regex from '../constants/regex';
+import {register} from '../api';
+import Loader from '../components/Loader';
 
 const OnboardingUserName = ({theme, route}) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
   const {colors} = theme;
 
-  const createAccount = () => {};
+  const createAccount = async () => {
+    try {
+      setLoading(!loading);
+      const userData = {
+        email,
+        password,
+        fullName: name,
+        phone: route.params.phoneNumber,
+      };
+      await register(userData);
+    } catch (error) {
+      console.log(error.message);
+      setLoading(false);
+      Alert.alert(error.message);
+      return;
+    }
+  };
 
   return (
     <View style={styles.container}>
+      <Loader loading={loading} />
       <TextInput
         style={styles.input}
         maxLength={17}
