@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {
   View,
@@ -14,28 +14,43 @@ import {transactions} from '../data/transactions';
 
 const Home = ({theme}) => {
   const {colors} = theme;
+  const [amount, setAmount] = useState(0);
+  const [hideAmount, setHideAmount] = useState(false);
   const {navigate} = useNavigation();
 
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Avatar.Text size={50} label="XD" color={colors.white} />
+        <Avatar.Text size={40} label="XD" color={colors.white} />
         <View style={styles.viewIcon}>
           <TouchableOpacity
             onPress={() => console.log('Notifications')}
             style={styles.icon}>
-            <Icon name="bell" size={25} color={colors.text} />
+            <Icon name="bell" size={20} color={colors.text} />
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.icon}
             onPress={() => navigate('Settings')}>
-            <Icon name="settings" size={25} color={colors.text} />
+            <Icon name="settings" size={20} color={colors.text} />
           </TouchableOpacity>
         </View>
       </View>
       <View style={styles.boxAmount}>
-        <Title style={{color: colors.primary}}>Solde Disponible </Title>
-        <Title style={styles.amount}>$25,432435</Title>
+        <Title style={{color: colors.primary}}>
+          Solde Disponible
+          <TouchableOpacity
+            style={styles.balanceIcon}
+            onPress={() => setHideAmount(!hideAmount)}>
+            <Icon
+              name={hideAmount ? 'eye' : 'eye-off'}
+              size={20}
+              color={colors.primary}
+            />
+          </TouchableOpacity>{' '}
+        </Title>
+        <Title style={styles.amount}>
+          {hideAmount ? '*'.repeat(5) : `${amount} XOF`}{' '}
+        </Title>
       </View>
       <View style={styles.viewBtn}>
         <Button
@@ -74,10 +89,10 @@ const styles = StyleSheet.create({
   },
   amount: {
     fontFamily: 'ProductSans-Bold',
-    fontSize: 40,
+    fontSize: 25,
     alignSelf: 'center',
     textAlign: 'center',
-    paddingTop: 18,
+    paddingTop: 10,
   },
   caption: {
     fontFamily: 'ProductSans-Bold',
@@ -111,6 +126,9 @@ const styles = StyleSheet.create({
     marginLeft: 17,
     fontFamily: 'ProductSans-Medium',
     marginVertical: 13,
+  },
+  balanceIcon: {
+    paddingLeft: 10,
   },
 });
 

@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
   },
   name: {
     fontFamily: 'ProductSans-Bold',
-    fontSize: 17,
+    fontSize: 15,
   },
   date: {
     fontFamily: 'ProductSans-Light',
