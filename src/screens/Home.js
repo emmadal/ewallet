@@ -1,4 +1,4 @@
-import React, {useState, useContext, useEffect} from 'react';
+import React, {useState, useContext} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {
   View,
@@ -14,23 +14,25 @@ import {Transaction} from '../components/Transaction';
 import {transactions} from '../data/transactions';
 
 const Home = ({theme}) => {
-  const [amount, setAmount] = useState(0);
-  const [splitName, setSplitName] = useState('');
   const [hideAmount, setHideAmount] = useState(false);
+  const [seletedAccount, setSeletedAccount] = useState(0);
   const {user} = useContext(UserContext);
-
-  useEffect(() => {
-    const n = user?.fullName.split(' ');
-    setSplitName(`${n[0]?.charAt(0)}${n[1]?.charAt(0)}`);
-  }, [user]);
-
   const {colors} = theme;
   const {navigate} = useNavigation();
+
+  const getFirstLetterOfName = () => {
+    const matches = user?.fullName.match(/\b(\w)/g);
+    return matches.join('');
+  };
 
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Avatar.Text size={40} label={splitName} color={colors.white} />
+        <Avatar.Text
+          size={40}
+          label={getFirstLetterOfName()}
+          color={colors.white}
+        />
         <View style={styles.viewIcon}>
           <TouchableOpacity
             onPress={() => console.log('Notifications')}
@@ -58,7 +60,9 @@ const Home = ({theme}) => {
           </TouchableOpacity>{' '}
         </Title>
         <Title style={styles.amount}>
-          {hideAmount ? '*'.repeat(5) : `${amount} XOF`}{' '}
+          {hideAmount
+            ? '*'.repeat(5)
+            : `${user?.accounts[seletedAccount]?.currentBalance} ${user?.accounts[seletedAccount]?.currencyIsoCode}`}{' '}
         </Title>
       </View>
       <View style={styles.viewBtn}>

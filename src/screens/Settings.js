@@ -1,11 +1,18 @@
-import React, {useCallback} from 'react';
+import React, {useCallback, useContext} from 'react';
 import {StyleSheet, TouchableOpacity, View, Dimensions} from 'react-native';
+import {UserContext} from '../context';
+import {logout} from '../api';
 import {withTheme, Title, Divider, Text} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 const Settings = ({theme}) => {
   const {colors} = theme;
-  const handleLogout = useCallback(() => {}, []);
+  const {setUser} = useContext(UserContext);
+
+  const handleLogout = useCallback(() => {
+    logout().then(() => setUser(null));
+  }, [setUser]);
+
   return (
     <View style={styles.container}>
       <TouchableOpacity style={styles.optionContainer} onPress={() => ''}>
