@@ -4,7 +4,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {UserContext} from './src/context';
 import auth from '@react-native-firebase/auth';
 import {Provider as PaperProvider} from 'react-native-paper';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import OnboardingStack from './src/navigation/OnboardingStack';
 import AuthStack from './src/navigation/AuthStack';
 import {LightTheme} from './src/themes';

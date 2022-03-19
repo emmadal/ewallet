@@ -80,66 +80,82 @@ const Home = ({theme}) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <Avatar.Text
-          size={40}
-          label={getFirstLetterOfName()}
-          color={colors.white}
-        />
-        <View style={styles.viewIcon}>
-          <TouchableOpacity
-            onPress={() => console.log('Notifications')}
-            style={styles.icon}>
-            <Icon name="bell" size={20} color={colors.text} />
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.icon}
-            onPress={() => navigate('Settings')}>
-            <Icon name="settings" size={20} color={colors.text} />
-          </TouchableOpacity>
+      <View style={styles.containerHead}>
+        <View style={styles.header}>
+          <Avatar.Text
+            size={45}
+            label={getFirstLetterOfName()}
+            color={colors.text}
+            style={styles.avatar}
+          />
+          <View style={styles.viewIcon}>
+            <TouchableOpacity
+              onPress={() => console.log('Notifications')}
+              style={styles.icon}>
+              <Icon name="bell" size={25} color={colors.white} />
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.icon}
+              onPress={() => navigate('Settings')}>
+              <Icon name="settings" size={25} color={colors.white} />
+            </TouchableOpacity>
+          </View>
         </View>
-      </View>
-      <View style={styles.boxAmount}>
-        <Title style={{color: colors.primary}}>
-          Solde Disponible
-          <TouchableOpacity
-            style={styles.balanceIcon}
-            onPress={() => setHideAmount(!hideAmount)}>
-            <Icon
-              name={hideAmount ? 'eye' : 'eye-off'}
-              size={20}
-              color={colors.primary}
-            />
-          </TouchableOpacity>{' '}
-        </Title>
-        <Title style={styles.amount}>
-          {hideAmount
-            ? '*'.repeat(5)
-            : `${user?.accounts[seletedAccount]?.currentBalance} ${user?.accounts[seletedAccount]?.currencyIsoCode}`}{' '}
-          <TouchableOpacity onPress={toggleBottomSheet}>
-            <Icon
-              name={openOptions ? 'chevron-up' : 'chevron-down'}
-              size={23}
-              color={colors.text}
-            />
-          </TouchableOpacity>
-        </Title>
-      </View>
-      <View style={styles.viewBtn}>
-        <Button
-          icon="arrow-down"
-          labelStyle={{color: colors.white}}
-          mode="contained"
-          onPress={() => console.log('Pressed')}>
-          Retrait
-        </Button>
-        <Button
-          icon="credit-card"
-          labelStyle={{color: colors.white}}
-          mode="contained"
-          onPress={() => console.log('Pressed')}>
-          Envoyer
-        </Button>
+        <View style={styles.boxAmount}>
+          <Title style={{color: colors.white}}>
+            Solde Disponible
+            <TouchableOpacity
+              style={styles.balanceIcon}
+              onPress={() => setHideAmount(!hideAmount)}>
+              <Icon
+                name={hideAmount ? 'eye' : 'eye-off'}
+                size={20}
+                color={colors.white}
+              />
+            </TouchableOpacity>{' '}
+          </Title>
+          <Title style={styles.amount}>
+            {hideAmount
+              ? '*'.repeat(5)
+              : `${user?.accounts[seletedAccount]?.currentBalance} ${user?.accounts[seletedAccount]?.currencyIsoCode}`}{' '}
+            <TouchableOpacity onPress={toggleBottomSheet}>
+              <Icon
+                name={openOptions ? 'chevron-up' : 'chevron-down'}
+                size={23}
+                color={colors.white}
+              />
+            </TouchableOpacity>
+          </Title>
+        </View>
+        <View style={styles.viewBtn}>
+          <Button
+            compact={true}
+            icon="arrow-top-right"
+            labelStyle={styles.labelStyle}
+            contentStyle={styles.contentStyle}
+            mode="contained"
+            onPress={() => console.log('Pressed')}>
+            Envoyer
+          </Button>
+          <Button
+            compact={true}
+            contentStyle={styles.contentStyle}
+            icon="arrow-bottom-right"
+            labelStyle={styles.labelStyle}
+            mode="contained"
+            onPress={() => console.log('Pressed')}>
+            Recevoir
+          </Button>
+          <Button
+            icon="sync"
+            contentStyle={styles.contentStyle}
+            compact={true}
+            labelStyle={styles.labelStyle}
+            mode="contained"
+            onPress={() => console.log('Pressed')}>
+            Convertir
+          </Button>
+        </View>
       </View>
       <Title style={styles.transactionTitle}>Mes Transactions</Title>
       <FlatList
@@ -172,13 +188,18 @@ const Home = ({theme}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: Platform.OS === 'ios' ? 80 : 30,
+  },
+  containerHead: {
+    backgroundColor: '#44bd32',
+    paddingTop: Platform.OS === 'ios' ? 75 : 30,
+    paddingBottom: 30,
   },
   amount: {
     fontFamily: 'ProductSans-Bold',
     fontSize: 23,
     alignSelf: 'center',
     marginTop: 10,
+    color: 'white',
   },
   caption: {
     fontFamily: 'ProductSans-Bold',
@@ -196,7 +217,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginTop: 25,
-    paddingHorizontal: 17,
+    paddingHorizontal: 10,
+    paddingTop: 15,
   },
   viewIcon: {
     flexDirection: 'row',
@@ -207,10 +229,11 @@ const styles = StyleSheet.create({
   boxAmount: {
     alignItems: 'center',
     justifyContent: 'center',
+    paddingTop: 15,
   },
   transactionTitle: {
     marginLeft: 17,
-    fontFamily: 'ProductSans-Medium',
+    fontFamily: 'ProductSans-Bold',
     marginVertical: 13,
   },
   balanceIcon: {
@@ -228,6 +251,18 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     backgroundColor: 'white',
+  },
+  labelStyle: {
+    color: '#000',
+    fontFamily: 'ProductSans-Bold',
+  },
+  contentStyle: {
+    backgroundColor: 'white',
+  },
+  avatar: {
+    borderColor: 'white',
+    backgroundColor: 'white',
+    borderWidth: 2,
   },
 });
 
