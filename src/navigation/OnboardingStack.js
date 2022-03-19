@@ -5,8 +5,6 @@ import OnboardingUserName from '../screens/OnboardingUserName';
 import OnboardingPhone from '../screens/OnboardingPhone';
 import Onboarding from '../screens/Onboarding';
 import Login from '../screens/Login';
-import Home from '../screens/Home';
-import Settings from '../screens/Settings';
 
 const Stack = createNativeStackNavigator();
 
@@ -51,24 +49,6 @@ const OnboardingStack = () => {
         component={Login}
         options={{
           headerTitle: 'Se connecter',
-          headerBackTitle: 'Retour',
-          headerTitleStyle: {
-            fontFamily: 'ProductSans-Medium',
-          },
-        }}
-      />
-      <Stack.Screen
-        name="Home"
-        component={Home}
-        options={{
-          headerShown: false,
-        }}
-      />
-      <Stack.Screen
-        name="Settings"
-        component={Settings}
-        options={{
-          headerTitle: 'Réglages',
           headerBackTitle: 'Retour',
           headerTitleStyle: {
             fontFamily: 'ProductSans-Medium',

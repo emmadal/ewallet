@@ -1,5 +1,7 @@
 package com.ewallet;
 
+import com.facebook.react.bridge.JSIModulePackage; // <- add
+import com.swmansion.reanimated.ReanimatedJSIModulePackage; // <- add
 import androidx.multidex.MultiDexApplication; // <-- ADD THIS IMPORT
 import android.app.Application;
 import android.content.Context;
@@ -34,6 +36,12 @@ public class MainApplication extends MultiDexApplication implements ReactApplica
         protected String getJSMainModuleName() {
           return "index";
         }
+
+        @Override
+        protected JSIModulePackage getJSIModulePackage() {
+          return new ReanimatedJSIModulePackage(); // <- add
+        }
+
       };
 
   @Override

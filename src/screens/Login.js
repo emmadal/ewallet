@@ -1,5 +1,12 @@
 import React, {useState, useContext} from 'react';
-import {View, StyleSheet, Dimensions, Alert} from 'react-native';
+import {
+  View,
+  StyleSheet,
+  Dimensions,
+  Alert,
+  KeyboardAvoidingView,
+  Platform,
+} from 'react-native';
 import {Text, withTheme, Button, TextInput} from 'react-native-paper';
 import {login} from '../api';
 import Loader from '../components/Loader';
@@ -32,7 +39,9 @@ const Login = ({theme}) => {
   };
 
   return (
-    <View style={styles.container}>
+    <KeyboardAvoidingView
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      style={styles.container}>
       <Loader loading={loading} />
       <View>
         <Text style={styles.title}>Bienvenue sur eWallet</Text>
@@ -70,7 +79,7 @@ const Login = ({theme}) => {
         theme={{roundness: 20}}>
         Se connecter
       </Button>
-    </View>
+    </KeyboardAvoidingView>
   );
 };
 
