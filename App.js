@@ -6,9 +6,9 @@ import auth from '@react-native-firebase/auth';
 import {Provider as PaperProvider} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import OnboardingStack from './src/navigation/OnboardingStack';
+import AuthStack from './src/navigation/AuthStack';
 import {LightTheme} from './src/themes';
 import {getProfile} from './src/api';
-import Home from './src/screens/Home';
 
 LogBox.ignoreLogs([
   "[react-native-gesture-handler] Seems like you're using an old API with gesture components, check out new Gestures system!",
@@ -43,7 +43,7 @@ const App = () => {
       />
       <UserContext.Provider value={{setUser, user}}>
         <NavigationContainer theme={LightTheme}>
-          {!user ? <OnboardingStack /> : <Home />}
+          {!user ? <OnboardingStack /> : <AuthStack />}
         </NavigationContainer>
       </UserContext.Provider>
     </PaperProvider>
