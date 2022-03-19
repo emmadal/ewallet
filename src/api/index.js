@@ -9,16 +9,35 @@ export const register = async data => {
     const {email, password, fullName, phone} = data;
     const res = await auth().createUserWithEmailAndPassword(email, password);
     if (res.user) {
-      await db.collection('users').doc(res.user.uid).set({
-        uid: res.user.uid,
-        email: res.user.email,
-        fullName: fullName,
-        phoneNumber: phone,
-        photoURL: res.user.photoURL,
-        creationTime: res.user.metadata.creationTime,
-        type: 'user',
-        status: 'active',
-      });
+      await db
+        .collection('users')
+        .doc(res.user.uid)
+        .set({
+          uid: res.user.uid,
+          email: res.user.email,
+          fullName: fullName,
+          phoneNumber: phone,
+          photoURL: res.user.photoURL,
+          creationTime: res.user.metadata.creationTime,
+          accounts: [
+            {
+              id: 1,
+              accountName: 'XOF',
+              balances: [],
+              createdDate: res.user.metadata.creationTime,
+              currencyIsoCode: 'XOF',
+              currentBalance: 0,
+            },
+            {
+              id: 2,
+              accountName: 'USDT',
+              balances: [],
+              createdDate: res.user.metadata.creationTime,
+              currencyIsoCode: 'USDT',
+              currentBalance: 0,
+            },
+          ],
+        });
       return res.user;
     }
   } catch (error) {
