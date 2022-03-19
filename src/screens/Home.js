@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {
   View,
@@ -8,20 +8,29 @@ import {
   FlatList,
 } from 'react-native';
 import {Avatar, withTheme, Title, Button} from 'react-native-paper';
+import {UserContext} from '../context';
 import Icon from 'react-native-vector-icons/Feather';
 import {Transaction} from '../components/Transaction';
 import {transactions} from '../data/transactions';
 
 const Home = ({theme}) => {
-  const {colors} = theme;
   const [amount, setAmount] = useState(0);
+  const [splitName, setSplitName] = useState('');
   const [hideAmount, setHideAmount] = useState(false);
+  const {user} = useContext(UserContext);
+
+  useEffect(() => {
+    const n = user?.fullName.split(' ');
+    setSplitName(`${n[0]?.charAt(0)}${n[1]?.charAt(0)}`);
+  }, [user]);
+
+  const {colors} = theme;
   const {navigate} = useNavigation();
 
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Avatar.Text size={40} label="XD" color={colors.white} />
+        <Avatar.Text size={40} label={splitName} color={colors.white} />
         <View style={styles.viewIcon}>
           <TouchableOpacity
             onPress={() => console.log('Notifications')}

@@ -1,19 +1,39 @@
-import React, {useState} from 'react';
-import {View, StyleSheet, Dimensions} from 'react-native';
+import React, {useState, useContext} from 'react';
+import {View, StyleSheet, Dimensions, Alert} from 'react-native';
 import {Text, withTheme, Button, TextInput} from 'react-native-paper';
-import {useNavigation} from '@react-navigation/native';
+import {login} from '../api';
+import Loader from '../components/Loader';
+import {UserContext} from '../context';
 import * as regex from '../constants/regex';
 
 const Login = ({theme}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
   const {colors} = theme;
-  const {navigate} = useNavigation();
+  const {setUser} = useContext(UserContext);
 
-  const handleLogin = () => navigate('Home');
+  const handleLogin = async () => {
+    try {
+      setLoading(!loading);
+      const res = await login({email, password});
+      if (res) {
+        setUser(res);
+      }
+    } catch (error) {
+      setLoading(false);
+      if (error.code === 'auth/user-not-found') {
+        Alert.alert('Aucun utilisateur ne correspond a ces identifiants');
+      }
+      if (error.code === 'auth/wrong-password') {
+        Alert.alert("Le mot de passe ou l'email est invalide");
+      }
+    }
+  };
 
   return (
     <View style={styles.container}>
+      <Loader loading={loading} />
       <View>
         <Text style={styles.title}>Bienvenue sur eWallet</Text>
         <Text style={styles.subtitle}>Connectez vous pour commencer</Text>
@@ -65,11 +85,11 @@ const styles = StyleSheet.create({
   },
   title: {
     textAlign: 'center',
-    fontSize: 23,
+    fontSize: 18,
     fontFamily: 'ProductSans-Bold',
   },
   subtitle: {
-    fontSize: 20,
+    fontSize: 14,
     textAlign: 'center',
     marginVertical: 15,
     fontFamily: 'ProductSans-Light',
@@ -87,7 +107,7 @@ const styles = StyleSheet.create({
   },
   labelStyle: {
     fontFamily: 'ProductSans-Medium',
-    fontSize: 18,
+    fontSize: 14,
   },
 });
 
