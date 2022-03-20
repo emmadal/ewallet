@@ -54,7 +54,7 @@ const Login = ({theme}) => {
         value={email}
         label="Email"
         onChangeText={text => setEmail(text)}
-        right={<TextInput.Icon name="envelope" color={colors.primary} />}
+        right={<TextInput.Icon name="email" color={colors.primary} />}
       />
       <TextInput
         style={styles.input}

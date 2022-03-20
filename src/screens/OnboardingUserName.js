@@ -40,7 +40,7 @@ const OnboardingUserName = ({theme, route}) => {
         value={name}
         label="Nom & Prénom"
         onChangeText={text => setName(text)}
-        right={<TextInput.Icon name="user" color={colors.primary} />}
+        right={<TextInput.Icon name="human-male" color={colors.primary} />}
       />
       <TextInput
         style={styles.input}
@@ -49,7 +49,7 @@ const OnboardingUserName = ({theme, route}) => {
         value={email}
         label="Email"
         onChangeText={text => setEmail(text)}
-        right={<TextInput.Icon name="envelope" color={colors.primary} />}
+        right={<TextInput.Icon name="email" color={colors.primary} />}
       />
       <TextInput
         style={styles.input}
