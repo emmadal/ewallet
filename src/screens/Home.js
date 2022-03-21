@@ -14,6 +14,7 @@ import {
   Title,
   Button,
   RadioButton,
+  Text,
 } from 'react-native-paper';
 import {UserContext} from '../context';
 import Icon from 'react-native-vector-icons/Feather';
@@ -28,6 +29,7 @@ const Home = ({theme}) => {
   const {navigate} = useNavigation();
   const [openOptions, setOptions] = useState(false);
   const [indexBottomRef, setIndexBottomRef] = useState(-1);
+  const [checked, setChecked] = useState('');
 
   const getFirstLetterOfName = () => user?.fullName.match(/\b(\w)/g).join('');
 
@@ -68,7 +70,6 @@ const Home = ({theme}) => {
           <RadioButton.Item
             label={item?.accountName}
             value={item?.currencyIsoCode}
-            status="checked"
             color={colors.primary}
             labelStyle={styles.renderLabel}
           />
@@ -83,7 +84,7 @@ const Home = ({theme}) => {
       <View style={styles.containerHead}>
         <View style={styles.header}>
           <Avatar.Text
-            size={45}
+            size={35}
             label={getFirstLetterOfName()}
             color={colors.text}
             style={styles.avatar}
@@ -114,47 +115,57 @@ const Home = ({theme}) => {
               />
             </TouchableOpacity>{' '}
           </Title>
-          <Title style={styles.amount}>
-            {hideAmount
-              ? '*'.repeat(5)
-              : `${user?.accounts[seletedAccount]?.currentBalance} ${user?.accounts[seletedAccount]?.currencyIsoCode}`}{' '}
-            <TouchableOpacity onPress={toggleBottomSheet}>
+          <TouchableOpacity onPress={toggleBottomSheet}>
+            <Title style={styles.amount}>
+              {hideAmount
+                ? '*'.repeat(5)
+                : `${user?.accounts[seletedAccount]?.currentBalance} ${user?.accounts[seletedAccount]?.currencyIsoCode}`}{' '}
               <Icon
                 name={openOptions ? 'chevron-up' : 'chevron-down'}
                 size={23}
                 color={colors.white}
               />
-            </TouchableOpacity>
-          </Title>
+            </Title>
+          </TouchableOpacity>
         </View>
         <View style={styles.viewBtn}>
-          <Button
-            compact={true}
-            icon="arrow-top-right"
-            labelStyle={styles.labelStyle}
-            contentStyle={styles.contentStyle}
-            mode="contained"
-            onPress={() => navigate('SendCrypto')}>
-            Envoyer
-          </Button>
-          <Button
-            compact={true}
-            contentStyle={styles.contentStyle}
-            icon="arrow-bottom-right"
-            labelStyle={styles.labelStyle}
-            mode="contained"
-            onPress={() => console.log('Pressed')}>
-            Recevoir
-          </Button>
-          <Button
-            icon="sync"
-            contentStyle={styles.contentStyle}
-            compact={true}
-            labelStyle={styles.labelStyle}
-            mode="contained"
-            onPress={() => console.log('Pressed')}>
-            Convertir
-          </Button>
+          <View style={styles.btn}>
+            <Button
+              compact={true}
+              icon="arrow-top-right"
+              labelStyle={styles.labelStyle}
+              contentStyle={styles.contentStyle}
+              mode="contained"
+              onPress={() => navigate('SendCrypto')}
+              theme={{roundness: 10}}
+            />
+            <Text style={styles.btnText}>Envoyer</Text>
+          </View>
+          <View style={styles.btn}>
+            <Button
+              compact={true}
+              contentStyle={styles.contentStyle}
+              icon="arrow-bottom-right"
+              labelStyle={styles.labelStyle}
+              mode="contained"
+              onPress={() => console.log('Pressed')}
+              theme={{roundness: 10}}
+            />
+            <Text style={styles.btnText}>Retirer</Text>
+          </View>
+
+          <View style={styles.btn}>
+            <Button
+              icon="sync"
+              contentStyle={styles.contentStyle}
+              compact={true}
+              labelStyle={styles.labelStyle}
+              mode="contained"
+              onPress={() => console.log('Pressed')}
+              theme={{roundness: 10}}
+            />
+            <Text style={styles.btnText}>Convertir</Text>
+          </View>
         </View>
       </View>
       <Title style={styles.transactionTitle}>Mes Transactions</Title>
@@ -194,6 +205,13 @@ const styles = StyleSheet.create({
     paddingTop: Platform.OS === 'ios' ? 75 : 30,
     paddingBottom: 30,
   },
+  btn: {
+    flexDirection: 'column',
+  },
+  btnText: {
+    color: 'white',
+    fontFamily: 'ProductSans-Bold',
+  },
   amount: {
     fontFamily: 'ProductSans-Bold',
     fontSize: 23,
@@ -215,7 +233,7 @@ const styles = StyleSheet.create({
   },
   viewBtn: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'space-around',
     marginTop: 25,
     paddingHorizontal: 10,
     paddingTop: 15,
@@ -260,9 +278,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   avatar: {
-    borderColor: 'white',
     backgroundColor: 'white',
-    borderWidth: 2,
   },
 });
 
