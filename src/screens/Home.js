@@ -134,7 +134,7 @@ const Home = ({theme}) => {
             labelStyle={styles.labelStyle}
             contentStyle={styles.contentStyle}
             mode="contained"
-            onPress={() => console.log('Pressed')}>
+            onPress={() => navigate('SendCrypto')}>
             Envoyer
           </Button>
           <Button
