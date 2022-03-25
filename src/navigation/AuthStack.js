@@ -3,6 +3,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {withTheme} from 'react-native-paper';
 import Home from '../screens/Home';
 import SendCrypto from '../screens/SendCrypto';
+import ConfirmIdentity from '../screens/ConfirmIdentity';
 import Settings from '../screens/Settings';
 
 const Stack = createNativeStackNavigator();
@@ -33,6 +34,17 @@ const AuthStack = () => {
         component={SendCrypto}
         options={{
           headerTitle: 'Envoyer de la cryptomonnaie',
+          headerBackTitle: 'Retour',
+          headerTitleStyle: {
+            fontFamily: 'ProductSans-Medium',
+          },
+        }}
+      />
+      <Stack.Screen
+        name="ConfirmIdentity"
+        component={ConfirmIdentity}
+        options={{
+          headerTitle: "Confirmation d'indentite",
           headerBackTitle: 'Retour',
           headerTitleStyle: {
             fontFamily: 'ProductSans-Medium',

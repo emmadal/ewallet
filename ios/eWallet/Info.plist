@@ -51,6 +51,12 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>NSCameraUsageDescription</key>
+	<string>Autoriser eWallet d'acceder a votre camera</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Autoriser eWallet d'acceder a la librairie photo</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Autoriser eWallet d'acceder a la librairie photo</string>
 	<key>UIAppFonts</key>
 	<array>
 	<string>AntDesign.ttf</string>

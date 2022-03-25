@@ -29,7 +29,6 @@ const Home = ({theme}) => {
   const {navigate} = useNavigation();
   const [openOptions, setOptions] = useState(false);
   const [indexBottomRef, setIndexBottomRef] = useState(-1);
-  const [checked, setChecked] = useState('');
 
   const getFirstLetterOfName = () => user?.fullName.match(/\b(\w)/g).join('');
 
