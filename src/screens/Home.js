@@ -82,12 +82,21 @@ const Home = ({theme}) => {
     <View style={styles.container}>
       <View style={styles.containerHead}>
         <View style={styles.header}>
-          <Avatar.Text
-            size={35}
-            label={getFirstLetterOfName()}
-            color={colors.text}
-            style={styles.avatar}
-          />
+          {user?.photoURL ? (
+            <Avatar.Image
+              size={60}
+              source={{
+                uri: user?.photoURL,
+              }}
+            />
+          ) : (
+            <Avatar.Text
+              color={colors.white}
+              size={60}
+              label={getFirstLetterOfName()}
+              style={styles.avatar}
+            />
+          )}
           <View style={styles.viewIcon}>
             <TouchableOpacity
               onPress={() => navigate('Activity')}

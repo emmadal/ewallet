@@ -6,6 +6,7 @@ import SendCrypto from '../screens/SendCrypto';
 import ConfirmIdentity from '../screens/ConfirmIdentity';
 import Settings from '../screens/Settings';
 import Activity from '../screens/Activity';
+import Profile from '../screens/Profile';
 
 const Stack = createNativeStackNavigator();
 
@@ -35,6 +36,17 @@ const AuthStack = () => {
         component={Activity}
         options={{
           headerTitle: 'Activité',
+          headerBackTitle: 'Retour',
+          headerTitleStyle: {
+            fontFamily: 'ProductSans-Medium',
+          },
+        }}
+      />
+      <Stack.Screen
+        name="Profile"
+        component={Profile}
+        options={{
+          headerTitle: 'Profil utilisateur',
           headerBackTitle: 'Retour',
           headerTitleStyle: {
             fontFamily: 'ProductSans-Medium',

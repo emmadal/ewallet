@@ -21,8 +21,23 @@ const Settings = ({theme}) => {
         style={styles.optionContainer}
         onPress={() => navigate('ConfirmIdentity')}>
         <Title style={styles.titleOptions}>
-          <Icon name="user" size={18} color={colors.placeholder} />
+          <Icon name="vcard" size={18} color={colors.placeholder} />
           {'  '} Confirmation d'identite
+        </Title>
+        <Icon
+          color={colors.primary}
+          style={styles.iconOptions}
+          name="chevron-right"
+          size={17}
+        />
+      </TouchableOpacity>
+      <Divider />
+      <TouchableOpacity
+        style={styles.optionContainer}
+        onPress={() => navigate('Profile')}>
+        <Title style={styles.titleOptions}>
+          <Icon name="users" size={18} color={colors.placeholder} />
+          {'  '} Profil utilisateur
         </Title>
         <Icon
           color={colors.primary}
@@ -43,7 +58,7 @@ const Settings = ({theme}) => {
           size={15}
         />
       </TouchableOpacity>
-      <Divider inset={true} />
+      <Divider />
       <TouchableOpacity style={styles.optionContainer} onPress={() => ''}>
         <Title style={styles.titleOptions}>
           <Icon name="globe" size={18} color={colors.placeholder} />
