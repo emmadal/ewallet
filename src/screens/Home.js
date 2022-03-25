@@ -13,7 +13,7 @@ import {
   withTheme,
   Title,
   Button,
-  RadioButton,
+  Checkbox,
   Text,
 } from 'react-native-paper';
 import {UserContext} from '../context';
@@ -23,6 +23,7 @@ import {RenderEmpty} from '../components/RenderEmpty';
 
 const Home = ({theme}) => {
   const [hideAmount, setHideAmount] = useState(false);
+  const [checked, setChecked] = useState('XOF');
   const [seletedAccount, setSeletedAccount] = useState(0);
   const {user} = useContext(UserContext);
   const {colors} = theme;
@@ -56,26 +57,26 @@ const Home = ({theme}) => {
     setOptions(!openOptions);
   };
 
-  const selectAccount = e => setSeletedAccount(e?.id - 1);
+  const selectAccount = e => {
+    setChecked(e?.accountName);
+    setSeletedAccount(e?.id - 1);
+  };
 
   // render
   const renderItem = useCallback(
     ({item}) => (
-      <RadioButton.Group
-        onValueChange={() => selectAccount(item)}
-        value={item}
-        style={styles.itemContainer}>
-        <View style={styles.itemRender}>
-          <RadioButton.Item
-            label={item?.accountName}
-            value={item?.currencyIsoCode}
-            color={colors.primary}
-            labelStyle={styles.renderLabel}
-          />
-        </View>
-      </RadioButton.Group>
+      <View style={styles.itemRender}>
+        <Checkbox.Item
+          onPress={() => selectAccount(item)}
+          label={item?.currencyIsoCode}
+          value={item?.currencyIsoCode}
+          status={checked === item?.currencyIsoCode ? 'checked' : 'unchecked'}
+          color={colors.primary}
+          labelStyle={styles.renderLabel}
+        />
+      </View>
     ),
-    [colors.primary],
+    [checked, colors.primary],
   );
 
   return (
@@ -274,6 +275,7 @@ const styles = StyleSheet.create({
   renderLabel: {
     fontFamily: 'ProductSans-Bold',
     fontSize: 18,
+    color: 'black',
   },
   contentContainer: {
     backgroundColor: 'white',
