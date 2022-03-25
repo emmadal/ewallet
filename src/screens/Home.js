@@ -90,7 +90,7 @@ const Home = ({theme}) => {
           />
           <View style={styles.viewIcon}>
             <TouchableOpacity
-              onPress={() => console.log('Notifications')}
+              onPress={() => navigate('Activity')}
               style={styles.icon}>
               <Icon name="bell" size={25} color={colors.white} />
             </TouchableOpacity>

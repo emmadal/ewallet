@@ -5,6 +5,7 @@ import Home from '../screens/Home';
 import SendCrypto from '../screens/SendCrypto';
 import ConfirmIdentity from '../screens/ConfirmIdentity';
 import Settings from '../screens/Settings';
+import Activity from '../screens/Activity';
 
 const Stack = createNativeStackNavigator();
 
@@ -23,6 +24,17 @@ const AuthStack = () => {
         component={Settings}
         options={{
           headerTitle: 'Réglages',
+          headerBackTitle: 'Retour',
+          headerTitleStyle: {
+            fontFamily: 'ProductSans-Medium',
+          },
+        }}
+      />
+      <Stack.Screen
+        name="Activity"
+        component={Activity}
+        options={{
+          headerTitle: 'Activité',
           headerBackTitle: 'Retour',
           headerTitleStyle: {
             fontFamily: 'ProductSans-Medium',
