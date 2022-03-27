@@ -49,6 +49,7 @@ const Login = ({theme}) => {
       </View>
       <TextInput
         style={styles.input}
+        autoFocus={true}
         autoCapitalize="none"
         keyboardType="email-address"
         value={email}
@@ -58,10 +59,8 @@ const Login = ({theme}) => {
       />
       <TextInput
         style={styles.input}
-        maxLength={8}
+        minLength={8}
         secureTextEntry={true}
-        keyboardType="number-pad"
-        textContentType="oneTimeCode"
         autoCapitalize="none"
         value={password}
         label="Mot de passe"
@@ -70,7 +69,9 @@ const Login = ({theme}) => {
       />
       <Button
         disabled={
-          password.length === 8 && regex.email.test(email) ? false : true
+          regex.password.test(password) && regex.email.test(email)
+            ? false
+            : true
         }
         labelStyle={[{color: colors.white}, styles.labelStyle]}
         onPress={handleLogin}

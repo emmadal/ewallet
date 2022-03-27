@@ -1,5 +1,11 @@
 import React, {useContext, useState, useCallback} from 'react';
-import {StyleSheet, TouchableOpacity, View, Alert} from 'react-native';
+import {
+  StyleSheet,
+  TouchableOpacity,
+  View,
+  Alert,
+  ScrollView,
+} from 'react-native';
 import {launchImageLibrary} from 'react-native-image-picker';
 import {UserContext} from '../context';
 import {
@@ -35,9 +41,7 @@ const Profile = ({theme}) => {
           setLoading(false);
         }
       } else {
-        Alert.alert('Operation echouée');
         setLoading(false);
-        return;
       }
     } catch (e) {
       setLoading(false);
@@ -74,23 +78,26 @@ const Profile = ({theme}) => {
   return (
     <View style={styles.container}>
       <Loader loading={loading} />
-      <TouchableOpacity onPress={handleUploadImage} style={styles.avatar}>
-        {user?.photoURL ? (
-          <Avatar.Image
-            size={60}
-            source={{
-              uri: user?.photoURL,
-            }}
-          />
-        ) : (
-          <Avatar.Text
-            color={colors.white}
-            size={60}
-            label={getFirstLetterOfName()}
-          />
-        )}
-      </TouchableOpacity>
-      <View>
+      <ScrollView
+        showsHorizontalScrollIndicator={false}
+        showsVerticalScrollIndicator={false}
+        style={styles.scroll}>
+        <TouchableOpacity onPress={handleUploadImage} style={styles.avatar}>
+          {user?.photoURL ? (
+            <Avatar.Image
+              size={60}
+              source={{
+                uri: user?.photoURL,
+              }}
+            />
+          ) : (
+            <Avatar.Text
+              color={colors.white}
+              size={60}
+              label={getFirstLetterOfName()}
+            />
+          )}
+        </TouchableOpacity>
         <TextInput
           style={styles.input}
           keyboardType="email-address"
@@ -125,13 +132,36 @@ const Profile = ({theme}) => {
         />
         <TextInput
           style={styles.input}
+          autoCapitalize="none"
+          disabled
+          value={user?.country}
+          mode="outlined"
+          label="Pays"
+        />
+        <TextInput
+          mode="outlined"
+          autoFocus={true}
+          label="Adresse"
+          style={styles.input}
+        />
+        <TextInput
+          mode="outlined"
+          autoFocus={true}
+          label="Ville"
+          style={styles.input}
+        />
+        <TextInput
+          style={styles.input}
           disabled
           mode="outlined"
           autoCapitalize="none"
-          value="Compte non confirmé"
+          value={!user?.isActive ? 'Compte non confirmé' : 'Compte confirmé'}
           label="Confirmation d'identité"
           right={
-            <TextInput.Icon name="account-details" color={colors.primary} />
+            <TextInput.Icon
+              name={user?.isActive ? 'check-circle' : 'alert-outline'}
+              color={user?.isActive ? colors.primary : colors.danger}
+            />
           }
         />
         <Button
@@ -143,7 +173,7 @@ const Profile = ({theme}) => {
           theme={{roundness: 20}}>
           Mise a jour
         </Button>
-      </View>
+      </ScrollView>
       <Snackbar
         duration={3000}
         style={[
@@ -165,10 +195,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: 25,
-    paddingTop: 20,
+  },
+  scroll: {
+    paddingTop: 25,
   },
   input: {
-    marginVertical: 13,
+    marginVertical: 5,
   },
   btn: {
     padding: 4,

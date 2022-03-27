@@ -49,18 +49,6 @@ const Settings = ({theme}) => {
       <Divider />
       <TouchableOpacity style={styles.optionContainer} onPress={() => ''}>
         <Title style={styles.titleOptions}>
-          <Icon name="envelope" size={18} color={colors.placeholder} /> Messages
-        </Title>
-        <Icon
-          color={colors.primary}
-          style={styles.iconOptions}
-          name="chevron-right"
-          size={15}
-        />
-      </TouchableOpacity>
-      <Divider />
-      <TouchableOpacity style={styles.optionContainer} onPress={() => ''}>
-        <Title style={styles.titleOptions}>
           <Icon name="globe" size={18} color={colors.placeholder} />
           {'  '}
           Langue

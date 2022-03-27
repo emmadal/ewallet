@@ -1,52 +1,54 @@
-import React, {useCallback} from 'react';
+import React, {useCallback, useContext, useState} from 'react';
 import {
   StyleSheet,
   View,
-  Dimensions,
   TouchableOpacity,
   PermissionsAndroid,
   Alert,
+  Platform,
 } from 'react-native';
-import {
-  withTheme,
-  TextInput,
-  Button,
-  Title,
-  Subheading,
-  Paragraph,
-} from 'react-native-paper';
+import {PERMISSIONS} from 'react-native-permissions';
+import ImageModal from 'react-native-image-modal';
+import {withTheme, Title, Subheading, Paragraph} from 'react-native-paper';
 import {launchImageLibrary} from 'react-native-image-picker';
+import {UserContext} from '../context';
 import Icon from 'react-native-vector-icons/Ionicons';
+import Loader from '../components/Loader';
+import {updateProfile, uploadKYC} from '../api';
 
 const ConfirmIdentity = ({theme}) => {
   const {colors} = theme;
+  const [loading, setLoading] = useState(false);
+  const {user, setUser} = useContext(UserContext);
 
-  const handlePicEdit = useCallback(async () => {
+  const handleKYC = useCallback(async () => {
     try {
       const pic = await launchImageLibrary({
         mediaType: 'photo',
         selectionLimit: 0,
       });
+      setLoading(!loading);
       if (pic.assets) {
-        // Formatted object data to send to the server
-        const formData = new FormData();
-        formData.append('filename', pic?.assets[0].fileName);
-        formData.append('description', 'indentity ressources');
-        // formData.append('file', {
-        //   name: pic?.assets[0].fileName,
-        //   uri: pic?.assets[0].uri,
-        //   type: pic?.assets[0].type,
-        // });
-        // Object to combine with fetch met
-        console.log(pic.assets);
+        const kycFiles = await uploadKYC(pic.assets);
+        if (kycFiles.length) {
+          const doc = await updateProfile(user, {kycFiles});
+          setUser(doc);
+          setLoading(false);
+        }
+      } else {
+        setLoading(false);
       }
-    } catch (error) {}
-  }, []);
+    } catch (e) {
+      setLoading(false);
+      Alert.alert('Operation echouée');
+      console.log(e.message);
+    }
+  }, [loading, setUser, user]);
 
   const requestCameraPermission = useCallback(async () => {
     try {
       const granted = await PermissionsAndroid.request(
-        PermissionsAndroid.PERMISSIONS.CAMERA,
+        PERMISSIONS.ANDROID.CAMERA,
         {
           title: 'eWallet Photo Permission',
           message: "Autoriser eWallet d'acceder a la librairie photo",
@@ -56,29 +58,29 @@ const ConfirmIdentity = ({theme}) => {
         },
       );
       if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-        await handlePicEdit();
+        await handleKYC();
       } else {
         Alert.alert('Permission refusée');
       }
     } catch (err) {
       console.warn(err);
     }
-  }, [handlePicEdit]);
+  }, [handleKYC]);
 
   return (
     <View style={styles.container}>
+      <Loader loading={loading} />
       <View>
-        <Title>
-          Téléchargez votre Piece d'identite ou Passeport et renseignez votre
-          adresse de domicialisation
-        </Title>
+        <Title>Téléchargez votre Pièce d'identité ou Passeport.</Title>
         <Subheading color={colors.gray}>
           Les fichiers PNG, JPEG, PDF sont autorisés
         </Subheading>
         <View style={styles.modalSubContent}>
           <TouchableOpacity
             style={styles.kycUploadField}
-            onPress={requestCameraPermission}>
+            onPress={
+              Platform.OS === 'android' ? requestCameraPermission : handleKYC
+            }>
             <Icon
               name="cloud-upload-outline"
               color={colors.primary}
@@ -88,30 +90,31 @@ const ConfirmIdentity = ({theme}) => {
           </TouchableOpacity>
         </View>
       </View>
-      <TextInput
-        mode="outlined"
-        autoFocus={true}
-        label="Addresse"
-        style={styles.input}
-      />
-      <TextInput
-        mode="outlined"
-        autoFocus={true}
-        label="Ville"
-        style={styles.input}
-      />
-      <Button
-        labelStyle={[{color: colors.white}, styles.labelStyle]}
-        mode="contained"
-        onPress={() => console.log('Send crypto')}
-        style={styles.btn}
-        theme={{roundness: 20}}>
-        Confirmation
-      </Button>
-      <Paragraph style={[{color: colors.danger}, styles.info]}>
-        Apres Confirmation de votre didentite vous serez en mesure de benificier
-        de tout les services de transactions.
-      </Paragraph>
+      {!user?.isActive && user?.kycFiles ? (
+        <View>
+          <Paragraph style={[{color: colors.danger}, styles.info]}>
+            Votre compte est en attente de validation.
+          </Paragraph>
+          <View style={styles.imgView}>
+            {user?.kycFiles.map(i => (
+              <ImageModal
+                key={i.id}
+                resizeMode="contain"
+                imageBackgroundColor="transparent"
+                style={styles.img}
+                source={{
+                  uri: i.url,
+                }}
+              />
+            ))}
+          </View>
+        </View>
+      ) : (
+        <Paragraph style={[{color: colors.danger}, styles.info]}>
+          Confirmer votre identité pour bénéficier de tout les services de
+          transactions.
+        </Paragraph>
+      )}
     </View>
   );
 };
@@ -121,7 +124,7 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: 17,
     backgroundColor: 'white',
-    paddingTop: 20,
+    paddingTop: 30,
   },
   kycUploadField: {
     justifyContent: 'center',
@@ -130,33 +133,25 @@ const styles = StyleSheet.create({
     borderColor: '#DCDCDC',
     borderWidth: 3,
     padding: 20,
-    marginVertical: 25,
+    marginVertical: 15,
+  },
+  modalSubContent: {
+    marginTop: 50,
   },
   input: {
-    marginVertical: 10,
-  },
-  feeText: {
-    fontFamily: 'ProductSans-Medium',
-    fontWeight: 'bold',
-    textAlign: 'center',
-    marginTop: 30,
-  },
-  btn: {
-    width: Dimensions.get('window').width / 1.5,
-    justifyContent: 'center',
-    padding: 3,
-    alignSelf: 'center',
-    marginVertical: 25,
-  },
-  rate: {
-    textAlign: 'center',
-    fontFamily: 'ProductSans-Light',
-    fontSize: 15,
-    marginTop: 30,
+    marginVertical: 9,
   },
   info: {
-    textAlign: 'center',
-    fontFamily: 'ProductSans-Light',
+    marginTop: 30,
+    fontFamily: 'ProductSans-Medium',
+  },
+  img: {
+    width: 160,
+    height: 160,
+  },
+  imgView: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
   },
 });
 

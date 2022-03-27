@@ -68,7 +68,7 @@ const AuthStack = () => {
         name="ConfirmIdentity"
         component={ConfirmIdentity}
         options={{
-          headerTitle: "Confirmation d'indentite",
+          headerTitle: "Confirmation d'identité",
           headerBackTitle: 'Retour',
           headerTitleStyle: {
             fontFamily: 'ProductSans-Medium',

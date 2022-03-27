@@ -12,6 +12,9 @@ target 'eWallet' do
     :hermes_enabled => true
   )
 
+  permissions_path = '../node_modules/react-native-permissions/ios'
+  pod 'Permission-MediaLibrary', :path => "#{permissions_path}/MediaLibrary"
+  pod 'Permission-PhotoLibrary', :path => "#{permissions_path}/PhotoLibrary"
   pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
 
   target 'eWalletTests' do

@@ -27,6 +27,7 @@ export const register = async data => {
             country,
             photoURL: res.user.photoURL,
             creationTime: res.user.metadata.creationTime,
+            isActive: false,
             accounts: [
               {
                 id: 1,
@@ -87,6 +88,7 @@ export const updateProfile = async (user, data) => {
       fullName: data?.fullName ?? user?.fullName,
       phoneNumber: data?.phoneNumber ?? user?.phoneNumber,
       photoURL: data?.photoURL ?? user?.photoURL,
+      kycFiles: user?.kycFiles ?? data?.kycFiles,
       updatedAt: new Date().toISOString(),
     });
   return await getProfile(user?.uid);
@@ -109,6 +111,23 @@ export const uploadFile = async data => {
     const url = await storage().ref(`users/${data?.fileName}`).getDownloadURL();
     return url;
   }
+};
+
+export const uploadKYC = async data => {
+  let files = [];
+  for (const i of data) {
+    const task = await storage()
+      .ref('kyc')
+      .child(`${i.fileName}`)
+      .putFile(i.uri, {
+        cacheControl: 'no-store',
+      });
+    if (task.state === 'success') {
+      const url = await storage().ref(`kyc/${i.fileName}`).getDownloadURL();
+      files.push({url, filename: i.fileName, id: new Date().getTime()});
+    }
+  }
+  return files;
 };
 
 export const getCurrencies = async () => {
