@@ -14,6 +14,7 @@ export const email = /^[^\s@]+@[^\s@]+\.([^\s@]{2,})+$/;
  * (?=.*\d): at least one digit
  * (?=.*[a-z]): at least one lower case
  * (?=.*[A-Z]): at least one uppercase case
- * [0-9a-zA-Z]{6,}: at least 6 from the mentioned characters
+ * [0-9a-zA-Z]{8,}: at least 8 from the mentioned characters
+ * (?=.*[!@#$%^&*]): at least one special characters
  */
-export const password = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{6,}$/;
+export const password = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;

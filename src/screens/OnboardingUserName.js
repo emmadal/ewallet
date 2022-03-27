@@ -1,8 +1,9 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import {View, StyleSheet, Alert} from 'react-native';
-import {withTheme, Button, TextInput} from 'react-native-paper';
+import {withTheme, Button, TextInput, Subheading} from 'react-native-paper';
 import * as regex from '../constants/regex';
-import {register} from '../api';
+import {login, register} from '../api';
+import {UserContext} from '../context';
 import Loader from '../components/Loader';
 
 const OnboardingUserName = ({theme, route}) => {
@@ -10,6 +11,7 @@ const OnboardingUserName = ({theme, route}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
+  const {setUser} = useContext(UserContext);
   const {colors} = theme;
 
   const createAccount = async () => {
@@ -20,8 +22,14 @@ const OnboardingUserName = ({theme, route}) => {
         password,
         fullName: name,
         phone: route.params.phoneNumber,
+        country: route.params.country,
+        currency: route.params.currency,
       };
-      await register(userData);
+      const res = await register(userData);
+      if (res) {
+        const auth = await login({email, password});
+        setUser(auth);
+      }
     } catch (error) {
       console.log(error.message);
       setLoading(false);
@@ -53,20 +61,25 @@ const OnboardingUserName = ({theme, route}) => {
       />
       <TextInput
         style={styles.input}
-        maxLength={8}
+        minLength={8}
         secureTextEntry={true}
-        keyboardType="number-pad"
-        textContentType="oneTimeCode"
         autoCapitalize="none"
         value={password}
         label="Mot de passe"
         onChangeText={text => setPassword(text)}
         right={<TextInput.Icon name="lock" color={colors.primary} />}
       />
+      <Subheading style={[styles.passwordInfo, {color: colors.danger}]}>
+        Votre mot de passe doit contenir des caractères speciaux, des chiffres,
+        des lettres minuscules, majuscules et au moins d'une longeur de 08
+        caractères.
+      </Subheading>
       <Button
         labelStyle={[{color: colors.white}, styles.labelStyle]}
         disabled={
-          name.length >= 6 && password.length === 8 && regex.email.test(email)
+          name.length >= 6 &&
+          regex.password.test(password) &&
+          regex.email.test(email)
             ? false
             : true
         }
@@ -108,6 +121,13 @@ const styles = StyleSheet.create({
   labelStyle: {
     fontFamily: 'ProductSans-Medium',
     fontSize: 18,
+  },
+  passwordInfo: {
+    // textAlign: 'center',
+    fontFamily: 'ProductSans-Light',
+    fontWeight: 'bold',
+    fontSize: 15,
+    marginHorizontal: 30,
   },
 });
 

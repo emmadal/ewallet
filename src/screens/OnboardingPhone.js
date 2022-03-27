@@ -5,6 +5,7 @@ import PhoneInput from 'react-native-phone-number-input';
 
 const OnboardingPhone = ({theme, navigation}) => {
   const [phoneValue, setPhoneValue] = useState('');
+  const [country, setCountry] = useState(null);
   const [formattedValue, setFormattedValue] = useState('');
   const phoneInput = useRef(null);
   const {colors} = theme;
@@ -18,11 +19,13 @@ const OnboardingPhone = ({theme, navigation}) => {
       <PhoneInput
         ref={phoneInput}
         defaultValue={phoneValue}
-        defaultCode="CI"
         layout="first"
         onChangeText={text => setPhoneValue(text)}
         containerStyle={styles.phoneInputStyle}
         onChangeFormattedText={text => setFormattedValue(text)}
+        onChangeCountry={({name, currency}) =>
+          setCountry({name, currency: currency[0]})
+        }
         withShadow={true}
         autoFocus
       />
@@ -32,6 +35,8 @@ const OnboardingPhone = ({theme, navigation}) => {
         onPress={() =>
           navigation.navigate('OnboardingUserName', {
             phoneNumber: formattedValue,
+            country: country?.name,
+            currency: country?.currency,
           })
         }
         style={styles.btn}

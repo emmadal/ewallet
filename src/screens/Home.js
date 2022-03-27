@@ -58,7 +58,7 @@ const Home = ({theme}) => {
   };
 
   const selectAccount = e => {
-    setChecked(e?.accountName);
+    setChecked(e?.currencyIsoCode);
     setSeletedAccount(e?.id - 1);
   };
 
@@ -92,7 +92,7 @@ const Home = ({theme}) => {
             />
           ) : (
             <Avatar.Text
-              color={colors.white}
+              color={colors.primary}
               size={60}
               label={getFirstLetterOfName()}
               style={styles.avatar}

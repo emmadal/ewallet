@@ -1,43 +1,50 @@
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 import storage from '@react-native-firebase/storage';
+import * as URL from './url.json';
+import {API_TOKEN, API_URL} from '@env';
 
 const db = firestore();
 
 export const register = async data => {
   try {
-    const {email, password, fullName, phone} = data;
+    const {email, password, fullName, phone, currency, country} = data;
     const res = await auth().createUserWithEmailAndPassword(email, password);
     if (res.user) {
-      await db
-        .collection('users')
-        .doc(res.user.uid)
-        .set({
-          uid: res.user.uid,
-          email: res.user.email,
-          fullName: fullName,
-          phoneNumber: phone,
-          photoURL: res.user.photoURL,
-          creationTime: res.user.metadata.creationTime,
-          accounts: [
-            {
-              id: 1,
-              accountName: 'XOF',
-              balances: [],
-              createdDate: res.user.metadata.creationTime,
-              currencyIsoCode: 'XOF',
-              currentBalance: 0,
-            },
-            {
-              id: 2,
-              accountName: 'USDT',
-              balances: [],
-              createdDate: res.user.metadata.creationTime,
-              currencyIsoCode: 'USDT',
-              currentBalance: 0,
-            },
-          ],
-        });
+      const subscriber = await CreateSubscriber(email, res.user.uid, country);
+      console.log({subscriber});
+      if (Object.keys(subscriber).length) {
+        await db
+          .collection('users')
+          .doc(res.user.uid)
+          .set({
+            uid: res.user.uid,
+            email: res.user.email,
+            fullName: fullName,
+            subscriberId: subscriber?.subscriber_id,
+            customerId: subscriber?.id,
+            phoneNumber: phone,
+            country,
+            photoURL: res.user.photoURL,
+            creationTime: res.user.metadata.creationTime,
+            accounts: [
+              {
+                id: 1,
+                balances: [],
+                createdDate: res.user.metadata.creationTime,
+                currencyIsoCode: currency,
+                currentBalance: 0,
+              },
+              {
+                id: 2,
+                balances: [],
+                createdDate: res.user.metadata.creationTime,
+                currencyIsoCode: 'USDT',
+                currentBalance: 0,
+              },
+            ],
+          });
+      }
       return res.user;
     }
   } catch (error) {
@@ -101,5 +108,33 @@ export const uploadFile = async data => {
   if (task.state === 'success') {
     const url = await storage().ref(`users/${data?.fileName}`).getDownloadURL();
     return url;
+  }
+};
+
+export const getCurrencies = async () => {
+  const params = {
+    method: 'GET',
+    redirect: 'follow',
+  };
+  const req = await fetch(`${API_URL}/${URL.currencies}`, params);
+  if (req.status === 200) {
+    return await req.json();
+  }
+};
+
+export const CreateSubscriber = async (email, subscriber_id, country) => {
+  const params = {
+    method: 'POST',
+    headers: {
+      accept: '*/*',
+      'Content-type': 'application/json',
+      authorization: `Bearer ${API_TOKEN}`,
+    },
+    body: JSON.stringify({email, subscriber_id, country}),
+  };
+  const res = await fetch(`${API_URL}/${URL.subscriber}`, params);
+  console.log(res);
+  if (res.status === 200) {
+    return await res.json();
   }
 };
