@@ -109,6 +109,11 @@ const ConfirmIdentity = ({theme}) => {
             ))}
           </View>
         </View>
+      ) : user?.isActive && user?.kycFiles.length ? (
+        <View style={styles.shield}>
+          <Title>Votre compte a été validé</Title>
+          <Icon name="shield-checkmark" color={colors.primary} size={80} />
+        </View>
       ) : (
         <Paragraph style={[{color: colors.danger}, styles.info]}>
           Confirmer votre identité pour bénéficier de tout les services de
@@ -152,6 +157,10 @@ const styles = StyleSheet.create({
   imgView: {
     flexDirection: 'row',
     justifyContent: 'space-around',
+  },
+  shield: {
+    alignItems: 'center',
+    marginTop: 45,
   },
 });
 

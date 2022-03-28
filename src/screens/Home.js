@@ -6,8 +6,10 @@ import {
   Platform,
   TouchableOpacity,
   FlatList,
+  Modal,
 } from 'react-native';
 import BottomSheet, {BottomSheetFlatList} from '@gorhom/bottom-sheet';
+import Icon from 'react-native-vector-icons/Ionicons';
 import {
   Avatar,
   withTheme,
@@ -17,13 +19,13 @@ import {
   Text,
 } from 'react-native-paper';
 import {UserContext} from '../context';
-import Icon from 'react-native-vector-icons/Feather';
 import {Transaction} from '../components/Transaction';
 import {RenderEmpty} from '../components/RenderEmpty';
 
 const Home = ({theme}) => {
   const [hideAmount, setHideAmount] = useState(false);
   const [checked, setChecked] = useState('XOF');
+  const [showModal, setModal] = useState(false);
   const [seletedAccount, setSeletedAccount] = useState(0);
   const {user} = useContext(UserContext);
   const {colors} = theme;
@@ -79,6 +81,31 @@ const Home = ({theme}) => {
     [checked, colors.primary],
   );
 
+  //render Modal
+  const renderModal = () => {
+    return (
+      <Modal
+        animationType="slide"
+        style={styles.modal}
+        transparent={false}
+        visible={showModal}
+        onRequestClose={() => setModal(false)}>
+        <View style={styles.modalContent}>
+          <View style={styles.modalContentClose}>
+            <TouchableOpacity onPress={() => setModal(false)}>
+              <Icon name="close-outline" size={50} color={colors.black} />
+            </TouchableOpacity>
+          </View>
+          <Title style={[{color: colors.danger}, styles.modalText]}>
+            Votre compte n'est pas encore actif pour bénéficier de tout les
+            services. Veuillez confirmer votre identité ou KYC dans le menu
+            CONFIRMATION D'IDENTITE et patienter pour la vérification du compte.
+          </Title>
+        </View>
+      </Modal>
+    );
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.containerHead}>
@@ -102,7 +129,7 @@ const Home = ({theme}) => {
             <TouchableOpacity
               onPress={() => navigate('Activity')}
               style={styles.icon}>
-              <Icon name="bell" size={25} color={colors.white} />
+              <Icon name="notifications" size={25} color={colors.white} />
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.icon}
@@ -145,7 +172,9 @@ const Home = ({theme}) => {
               labelStyle={styles.labelStyle}
               contentStyle={styles.contentStyle}
               mode="contained"
-              onPress={() => navigate('SendCrypto')}
+              onPress={() =>
+                user?.isActive ? navigate('SendCrypto') : setModal(!showModal)
+              }
               theme={{roundness: 10}}
             />
             <Text style={styles.btnText}>Envoyer</Text>
@@ -201,6 +230,7 @@ const Home = ({theme}) => {
           contentContainerStyle={styles.contentContainer}
         />
       </BottomSheet>
+      {renderModal()}
     </View>
   );
 };
@@ -289,6 +319,25 @@ const styles = StyleSheet.create({
   },
   avatar: {
     backgroundColor: 'white',
+  },
+  modal: {
+    position: 'relative',
+    backgroundColor: '#fff',
+  },
+  modalContent: {
+    marginTop: 30,
+    padding: 20,
+    position: 'relative',
+    display: 'flex',
+  },
+  modalContentClose: {
+    top: 20,
+    alignItems: 'flex-end',
+    height: 70,
+  },
+  modalText: {
+    marginTop: 50,
+    fontFamily: 'ProductSans-Bold',
   },
 });
 

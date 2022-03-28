@@ -150,20 +150,6 @@ const Profile = ({theme}) => {
           label="Ville"
           style={styles.input}
         />
-        <TextInput
-          style={styles.input}
-          disabled
-          mode="outlined"
-          autoCapitalize="none"
-          value={!user?.isActive ? 'Compte non confirmé' : 'Compte confirmé'}
-          label="Confirmation d'identité"
-          right={
-            <TextInput.Icon
-              name={user?.isActive ? 'check-circle' : 'alert-outline'}
-              color={user?.isActive ? colors.primary : colors.danger}
-            />
-          }
-        />
         <Button
           disabled={phoneNumber.length && fullName.length >= 5 ? false : true}
           labelStyle={{color: colors.white}}
