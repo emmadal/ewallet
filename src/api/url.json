@@ -1,4 +1,4 @@
 {
-    "subscriber": "billing/subscribers",
-    "currencies": "currencies"
+    "subscriber": "https://api-sandbox.coingate.com/v2/billing/subscribers",
+    "currencies": "https://api-sandbox.coingate.com/v2/currencies"
 }

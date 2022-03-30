@@ -5,8 +5,7 @@
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
-    "start:development": "NODE_ENV=development npx react-native start --reset-cache",
-    "start:production": "NODE_ENV=production npx react-native start --reset-cache",
+    "start": "npx react-native start --reset-cache",
     "test": "jest",
     "lint": "eslint ."
   },
@@ -22,11 +21,9 @@
     "@react-navigation/bottom-tabs": "^6.2.0",
     "@react-navigation/native": "^6.0.8",
     "@react-navigation/native-stack": "^6.5.0",
-    "paydunya": "^1.0.12",
     "react": "17.0.2",
     "react-native": "0.67.3",
     "react-native-camera": "^4.2.1",
-    "react-native-dotenv": "^3.3.1",
     "react-native-fast-image": "^8.5.11",
     "react-native-gesture-handler": "^2.2.0",
     "react-native-image-modal": "^2.0.4",

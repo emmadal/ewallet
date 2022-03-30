@@ -5,8 +5,10 @@ import {
   View,
   Alert,
   ScrollView,
+  Platform,
 } from 'react-native';
 import {launchImageLibrary} from 'react-native-image-picker';
+import {check, PERMISSIONS, request} from 'react-native-permissions';
 import {UserContext} from '../context';
 import {
   withTheme,
@@ -27,7 +29,27 @@ const Profile = ({theme}) => {
   const [visible, setVisible] = React.useState(false);
 
   const handleUploadImage = useCallback(async () => {
-    try {
+    const {IOS, ANDROID} = PERMISSIONS;
+
+    // request permissions to read picture on device
+    if (Platform.OS === 'ios') {
+      await request(IOS.CAMERA);
+    }
+    if (Platform.OS === 'android') {
+      await request(ANDROID.READ_EXTERNAL_STORAGE, {
+        title: 'eWallet',
+        message: 'Allow to acces your media library ?',
+        buttonNegative: 'Cancel',
+        buttonPositive: 'OK',
+      });
+    }
+
+    // Check the permission if it granted (allowed)
+    const status =
+      Platform.OS === 'ios' ? IOS.CAMERA : ANDROID.READ_EXTERNAL_STORAGE;
+    const permission = await check(status);
+
+    if (permission === 'granted') {
       const pic = await launchImageLibrary({mediaType: 'photo'});
       setLoading(!loading);
       if (pic.assets) {
@@ -43,10 +65,9 @@ const Profile = ({theme}) => {
       } else {
         setLoading(false);
       }
-    } catch (e) {
+    } else {
       setLoading(false);
-      Alert.alert('Operation echouée');
-      console.log(e.message);
+      Alert.alert('Permission non autorisée');
     }
   }, [loading, setUser, user]);
 

@@ -2,7 +2,6 @@ import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 import storage from '@react-native-firebase/storage';
 import * as URL from './url.json';
-import {API_TOKEN, API_URL} from '@env';
 
 const db = firestore();
 
@@ -12,7 +11,6 @@ export const register = async data => {
     const res = await auth().createUserWithEmailAndPassword(email, password);
     if (res.user) {
       const subscriber = await CreateSubscriber(email, res.user.uid, country);
-      console.log({subscriber});
       if (Object.keys(subscriber).length) {
         await db
           .collection('users')
@@ -135,7 +133,7 @@ export const getCurrencies = async () => {
     method: 'GET',
     redirect: 'follow',
   };
-  const req = await fetch(`${API_URL}/${URL.currencies}`, params);
+  const req = await fetch(URL.currencies, params);
   if (req.status === 200) {
     return await req.json();
   }
@@ -147,12 +145,11 @@ export const CreateSubscriber = async (email, subscriber_id, country) => {
     headers: {
       accept: '*/*',
       'Content-type': 'application/json',
-      authorization: `Bearer ${API_TOKEN}`,
+      authorization: 'Bearer 6sLBc6kGEmtYPQXWhKqUV9VsfmTH_h3q1zAnPsNx',
     },
     body: JSON.stringify({email, subscriber_id, country}),
   };
-  const res = await fetch(`${API_URL}/${URL.subscriber}`, params);
-  console.log(res);
+  const res = await fetch(URL.subscriber, params);
   if (res.status === 200) {
     return await res.json();
   }
