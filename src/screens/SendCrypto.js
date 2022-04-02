@@ -5,11 +5,10 @@ import {useNavigation} from '@react-navigation/native';
 import {VirtualKeyboard} from 'react-native-screen-keyboard';
 import {UserContext} from '../context';
 import Icon from 'react-native-vector-icons/Ionicons';
-import * as regex from '../constants/regex';
 
 const SendCrypto = ({theme}) => {
   const {colors} = theme;
-  const [amount, setAmount] = useState('');
+  const [amount, setAmount] = useState(0);
   const keyboardRef = useRef(null);
   const {navigate} = useNavigation();
   const {user} = useContext(UserContext);
@@ -21,7 +20,7 @@ const SendCrypto = ({theme}) => {
     [
       '',
       0,
-      <Icon name={'chevron-back-outline'} color={colors.black} size={35} />,
+      <Icon name={'arrow-back-outline'} color={colors.black} size={35} />,
     ],
   ];
 
@@ -35,14 +34,13 @@ const SendCrypto = ({theme}) => {
           </Title>
         </View>
         <TextInput
-          defaultValue={regex.currencyFormat(amount)}
+          defaultValue={amount}
           style={styles.userInputNumber}
           editable={false}
           textAlign="center"
-          autoCapitalize="none"
           placeholder="0"
           keyboardType="number-pad"
-          onChangeText={value => setAmount(value)}
+          onChangeText={value => setAmount(Number(value))}
           underlineColor="transparent"
           activeUnderlineColor="transparent"
           placeholderTextColor={colors.text}
@@ -70,10 +68,10 @@ const SendCrypto = ({theme}) => {
         labelStyle={[{color: colors.white}, styles.labelStyle]}
         mode="contained"
         disabled={amount >= 1 ? false : true}
-        onPress={() => console.log('Send crypto')}
+        onPress={() => navigate('SendTether', {amount})}
         style={styles.btn}
         theme={{roundness: 20}}>
-        Envoyer
+        Suivant
       </Button>
     </View>
   );

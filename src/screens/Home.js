@@ -173,7 +173,7 @@ const Home = ({theme}) => {
               contentStyle={styles.contentStyle}
               mode="contained"
               onPress={() =>
-                user?.isActive ? navigate('SendCrypto') : setModal(!showModal)
+                user?.isActive ? navigate('SendTether') : setModal(!showModal)
               }
               theme={{roundness: 10}}
             />

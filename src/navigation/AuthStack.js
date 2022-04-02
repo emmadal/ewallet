@@ -7,6 +7,8 @@ import ConfirmIdentity from '../screens/ConfirmIdentity';
 import Settings from '../screens/Settings';
 import Activity from '../screens/Activity';
 import Profile from '../screens/Profile';
+import SendTether from '../screens/SendTether';
+import SendTetherSuccess from '../screens/SendTetherSuccess';
 
 const Stack = createNativeStackNavigator();
 
@@ -62,6 +64,24 @@ const AuthStack = () => {
           headerTitleStyle: {
             fontFamily: 'ProductSans-Medium',
           },
+        }}
+      />
+      <Stack.Screen
+        name="SendTether"
+        component={SendTether}
+        options={{
+          headerTitle: 'Envoyer du Thether',
+          headerBackTitle: 'Retour',
+          headerTitleStyle: {
+            fontFamily: 'ProductSans-Medium',
+          },
+        }}
+      />
+      <Stack.Screen
+        name="SendTetherSuccess"
+        component={SendTetherSuccess}
+        options={{
+          headerShown: false
         }}
       />
       <Stack.Screen
