@@ -53,14 +53,19 @@ const Profile = ({theme}) => {
       const pic = await launchImageLibrary({mediaType: 'photo'});
       setLoading(!loading);
       if (pic.assets) {
-        const photoURL = await uploadFile({
-          uri: pic?.assets[0].uri,
-          fileName: pic?.assets[0].fileName,
-        });
-        if (photoURL) {
-          const doc = await updateProfile(user, {photoURL});
-          setUser(doc);
+        try {
+          const photoURL = await uploadFile({
+            uri: pic?.assets[0].uri,
+            fileName: pic?.assets[0].fileName,
+          });
+          if (photoURL) {
+            const doc = await updateProfile(user, {photoURL});
+            setUser(doc);
+            setLoading(false);
+          }
+        } catch (error) {
           setLoading(false);
+          console.log('error message: ', error.message);
         }
       } else {
         setLoading(false);

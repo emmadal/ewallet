@@ -18,3 +18,9 @@ export const email = /^[^\s@]+@[^\s@]+\.([^\s@]{2,})+$/;
  * (?=.*[!@#$%^&*]): at least one special characters
  */
 export const password = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+
+export const currencyFormat = num => {
+  return String(num)
+    .replace(/(\.\d{2})\d*/, '$1')
+    .replace(/(\d)(?=(\d{3})+\b)/g, '$1,');
+};

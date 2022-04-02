@@ -57,7 +57,7 @@ const AuthStack = () => {
         name="SendCrypto"
         component={SendCrypto}
         options={{
-          headerTitle: 'Envoyer de la cryptomonnaie',
+          headerTitle: 'Envoyer',
           headerBackTitle: 'Retour',
           headerTitleStyle: {
             fontFamily: 'ProductSans-Medium',

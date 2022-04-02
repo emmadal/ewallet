@@ -85,7 +85,7 @@ export const updateProfile = async (user, data) => {
     .update({
       fullName: data?.fullName ?? user?.fullName,
       phoneNumber: data?.phoneNumber ?? user?.phoneNumber,
-      photoURL: data?.photoURL ?? user?.photoURL,
+      photoURL: user?.photoURL ?? data?.photoURL,
       kycFiles: user?.kycFiles ?? data?.kycFiles,
       updatedAt: new Date().toISOString(),
     });
