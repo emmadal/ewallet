@@ -182,6 +182,20 @@ const Home = ({theme}) => {
           <View style={styles.btn}>
             <Button
               compact={true}
+              icon="wallet"
+              labelStyle={styles.labelStyle}
+              contentStyle={styles.contentStyle}
+              mode="contained"
+              onPress={() =>
+                user?.isActive ? navigate('Deposit') : setModal(!showModal)
+              }
+              theme={{roundness: 10}}
+            />
+            <Text style={styles.btnText}>Dépot</Text>
+          </View>
+          <View style={styles.btn}>
+            <Button
+              compact={true}
               contentStyle={styles.contentStyle}
               icon="arrow-bottom-right"
               labelStyle={styles.labelStyle}
@@ -191,7 +205,6 @@ const Home = ({theme}) => {
             />
             <Text style={styles.btnText}>Retirer</Text>
           </View>
-
           <View style={styles.btn}>
             <Button
               icon="sync"
@@ -202,7 +215,7 @@ const Home = ({theme}) => {
               onPress={() => console.log('Pressed')}
               theme={{roundness: 10}}
             />
-            <Text style={styles.btnText}>Convertir</Text>
+            <Text style={styles.btnText}>Vendre</Text>
           </View>
         </View>
       </View>

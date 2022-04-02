@@ -1,4 +1,10 @@
-import React, {useRef, useContext, useState} from 'react';
+import React, {
+  useRef,
+  useContext,
+  useState,
+  useEffect,
+  useCallback,
+} from 'react';
 import {
   StyleSheet,
   View,
@@ -21,9 +27,10 @@ import {UserContext} from '../context';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {useNavigation} from '@react-navigation/native';
 
-const SendTether = ({theme}) => {
+const Deposit = ({theme}) => {
   const {colors} = theme;
   const [amount, setAmount] = useState(0);
+  const [eth, setEth] = useState(0);
   const [loading, setLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [address, setAddress] = useState('');
@@ -75,13 +82,13 @@ const SendTether = ({theme}) => {
     );
   };
 
-  const handleSendThether = () => {
-    navigate('SendTetherSuccess', {
-      recipientWallet: address,
-      cryptoAmount: amount,
-    });
+  const handleFees = useCallback(() => setEth(amount * 0.0017), [amount]);
+
+  const handleDepositThether = () => {
     // setLoading(!loading);
   };
+
+  useEffect(() => handleFees(), [handleFees]);
 
   return (
     <View style={styles.container}>
@@ -92,26 +99,27 @@ const SendTether = ({theme}) => {
           source={require('../assets/tether-logo.png')}
           style={styles.logo}
         />
-        <Title style={styles.title}>Envoyer du Tether</Title>
+        <Title style={styles.title}>Faire un dépot sur votre wallet</Title>
         <Caption style={styles.caption}>
-          Entrer le montant que vous voulez envoyer
+          Entrez le montant que vous voulez déposer
         </Caption>
       </View>
       <View style={styles.containerInput}>
         <TextInput
           style={styles.inputFlat}
-          editable={false}
           mode="flat"
-          label="USDT"
+          label="XOF"
           right={<TextInput.Icon name="wallet-outline" />}
           value={amount}
           onChangeText={text => setAmount(Number(text))}
         />
         <TextInput
           style={styles.inputFlat}
-          editable={false}
+          disabled={false}
           mode="flat"
-          label="XOF"
+          label="USDT"
+          value={String(eth)}
+          onChangeText={text => setEth(Number(text))}
           right={<TextInput.Icon name="wallet" />}
         />
         <TextInput
@@ -142,8 +150,8 @@ const SendTether = ({theme}) => {
       <Button
         labelStyle={[{color: colors.white}, styles.labelStyle]}
         mode="contained"
-        disabled={amount >= 1 ? false : true}
-        onPress={handleSendThether}
+        disabled={amount >= 1000 ? false : true}
+        onPress={handleDepositThether}
         style={styles.btn}
         theme={{roundness: 20}}>
         Envoyer
@@ -178,6 +186,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     fontFamily: 'ProductSans-Bold',
     fontSize: 18,
+    color: 'black',
   },
   inputAddress: {
     marginTop: 10,
@@ -201,4 +210,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(SendTether);
+export default withTheme(Deposit);

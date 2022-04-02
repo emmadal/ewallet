@@ -9,6 +9,7 @@ import Activity from '../screens/Activity';
 import Profile from '../screens/Profile';
 import SendTether from '../screens/SendTether';
 import SendTetherSuccess from '../screens/SendTetherSuccess';
+import Deposit from '../screens/Deposit';
 
 const Stack = createNativeStackNavigator();
 
@@ -67,6 +68,17 @@ const AuthStack = () => {
         }}
       />
       <Stack.Screen
+        name="Deposit"
+        component={Deposit}
+        options={{
+          headerTitle: 'Faire un dépot',
+          headerBackTitle: 'Retour',
+          headerTitleStyle: {
+            fontFamily: 'ProductSans-Medium',
+          },
+        }}
+      />
+      <Stack.Screen
         name="SendTether"
         component={SendTether}
         options={{
@@ -81,7 +93,7 @@ const AuthStack = () => {
         name="SendTetherSuccess"
         component={SendTetherSuccess}
         options={{
-          headerShown: false
+          headerShown: false,
         }}
       />
       <Stack.Screen
