@@ -90,7 +90,7 @@ const ConfirmIdentity = ({theme}) => {
           </TouchableOpacity>
         </View>
       </View>
-      {!user?.isActive && user?.kycFiles ? (
+      {!user?.isActive && user?.kycFiles.length ? (
         <View>
           <Paragraph style={[{color: colors.danger}, styles.info]}>
             Votre compte est en attente de validation.

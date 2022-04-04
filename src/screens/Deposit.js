@@ -11,6 +11,7 @@ import {
   Dimensions,
   Modal,
   TouchableOpacity,
+  Alert,
 } from 'react-native';
 import {
   withTheme,
@@ -26,6 +27,7 @@ import Loader from '../components/Loader';
 import {UserContext} from '../context';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {useNavigation} from '@react-navigation/native';
+import {MINIMUM_AMOUNT} from '../api/env';
 
 const Deposit = ({theme}) => {
   const {colors} = theme;
@@ -85,7 +87,11 @@ const Deposit = ({theme}) => {
   const handleFees = useCallback(() => setEth(amount * 0.0017), [amount]);
 
   const handleDepositThether = () => {
-    // setLoading(!loading);
+    if (amount < MINIMUM_AMOUNT) {
+      Alert.alert('Le dépot minimal autorisé est de 1000 FCFA');
+    } else {
+      navigate('PaymentMethod', {amount});
+    }
   };
 
   useEffect(() => handleFees(), [handleFees]);
@@ -115,7 +121,7 @@ const Deposit = ({theme}) => {
         />
         <TextInput
           style={styles.inputFlat}
-          disabled={false}
+          editable={false}
           mode="flat"
           label="USDT"
           value={String(eth)}
@@ -124,11 +130,12 @@ const Deposit = ({theme}) => {
         />
         <TextInput
           style={styles.inputAddress}
+          editable={false}
           autoCapitalize="none"
-          label="Coller l'adresse"
-          value={address}
+          label="Votre adresse"
+          value={user?.walletAddress?.address}
           onChangeText={text => setAddress(text)}
-          right={<TextInput.Icon name="qrcode" />}
+          right={<TextInput.Icon name="clipboard" />}
         />
       </View>
       <View style={styles.keyboardView}>
@@ -150,11 +157,10 @@ const Deposit = ({theme}) => {
       <Button
         labelStyle={[{color: colors.white}, styles.labelStyle]}
         mode="contained"
-        disabled={amount >= 1000 ? false : true}
         onPress={handleDepositThether}
         style={styles.btn}
         theme={{roundness: 20}}>
-        Envoyer
+        Faire le depot
       </Button>
       {renderModal()}
     </View>

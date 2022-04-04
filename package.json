@@ -7,7 +7,8 @@
     "ios": "react-native run-ios",
     "start": "npx react-native start --reset-cache",
     "test": "jest",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "postinstall": "patch-package"
   },
   "dependencies": {
     "@gorhom/bottom-sheet": "^4.1.5",
@@ -21,9 +22,11 @@
     "@react-navigation/bottom-tabs": "^6.2.0",
     "@react-navigation/native": "^6.0.8",
     "@react-navigation/native-stack": "^6.5.0",
+    "patch-package": "^6.4.7",
     "react": "17.0.2",
     "react-native": "0.67.3",
     "react-native-camera": "^4.2.1",
+    "react-native-credit-card-input": "^0.4.1",
     "react-native-fast-image": "^8.5.11",
     "react-native-gesture-handler": "^2.2.0",
     "react-native-image-modal": "^2.0.4",

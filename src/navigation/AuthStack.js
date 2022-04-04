@@ -10,6 +10,7 @@ import Profile from '../screens/Profile';
 import SendTether from '../screens/SendTether';
 import SendTetherSuccess from '../screens/SendTetherSuccess';
 import Deposit from '../screens/Deposit';
+import PaymentMethod from '../screens/PaymentMethod';
 
 const Stack = createNativeStackNavigator();
 
@@ -72,6 +73,17 @@ const AuthStack = () => {
         component={Deposit}
         options={{
           headerTitle: 'Faire un dépot',
+          headerBackTitle: 'Retour',
+          headerTitleStyle: {
+            fontFamily: 'ProductSans-Medium',
+          },
+        }}
+      />
+      <Stack.Screen
+        name="PaymentMethod"
+        component={PaymentMethod}
+        options={{
+          headerTitle: 'Méthode de paiement',
           headerBackTitle: 'Retour',
           headerTitleStyle: {
             fontFamily: 'ProductSans-Medium',
