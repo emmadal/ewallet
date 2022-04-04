@@ -41,7 +41,7 @@ const ConfirmIdentity = ({theme}) => {
     } catch (e) {
       setLoading(false);
       Alert.alert('Operation echouée');
-      console.log(e.message);
+      console.log(e);
     }
   }, [loading, setUser, user]);
 

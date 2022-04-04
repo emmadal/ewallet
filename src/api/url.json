@@ -1,4 +1,3 @@
 {
-    "subscriber": "https://api-sandbox.coingate.com/v2/billing/subscribers",
-    "currencies": "https://api-sandbox.coingate.com/v2/currencies"
+    "createwallet": "https://cryptoprocessing.io/api/v1/wallets"
 }

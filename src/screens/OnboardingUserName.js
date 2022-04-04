@@ -1,5 +1,5 @@
 import React, {useState, useContext} from 'react';
-import {View, StyleSheet, Alert} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import {withTheme, Button, TextInput, Subheading} from 'react-native-paper';
 import * as regex from '../constants/regex';
 import {login, register} from '../api';
@@ -33,7 +33,6 @@ const OnboardingUserName = ({theme, route}) => {
     } catch (error) {
       console.log(error.message);
       setLoading(false);
-      Alert.alert(error.message);
       return;
     }
   };

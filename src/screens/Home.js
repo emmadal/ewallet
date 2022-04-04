@@ -8,7 +8,7 @@ import {
   FlatList,
   Modal,
 } from 'react-native';
-import BottomSheet, {BottomSheetFlatList} from '@gorhom/bottom-sheet';
+// import BottomSheet, {BottomSheetFlatList} from '@gorhom/bottom-sheet';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {
   Avatar,
@@ -19,14 +19,14 @@ import {
   Text,
 } from 'react-native-paper';
 import {UserContext} from '../context';
-import {Transaction} from '../components/Transaction';
-import {RenderEmpty} from '../components/RenderEmpty';
+// import {Transaction} from '../components/Transaction';
+// import {RenderEmpty} from '../components/RenderEmpty';
 
 const Home = ({theme}) => {
   const [hideAmount, setHideAmount] = useState(false);
-  const [checked, setChecked] = useState('XOF');
+  // const [checked, setChecked] = useState('XOF');
   const [showModal, setModal] = useState(false);
-  const [seletedAccount, setSeletedAccount] = useState(0);
+  // const [seletedAccount, setSeletedAccount] = useState(0);
   const {user} = useContext(UserContext);
   const {colors} = theme;
   const {navigate} = useNavigation();
@@ -39,16 +39,16 @@ const Home = ({theme}) => {
   const bottomSheetRef = useRef(null);
 
   // variables
-  const snapPoints = useMemo(() => ['25%'], []);
+  // const snapPoints = useMemo(() => ['25%'], []);
 
-  const handleSheetChanges = useCallback(
-    index => {
-      if (index === -1 && openOptions) {
-        setOptions(!openOptions);
-      }
-    },
-    [openOptions],
-  );
+  // const handleSheetChanges = useCallback(
+  //   index => {
+  //     if (index === -1 && openOptions) {
+  //       setOptions(!openOptions);
+  //     }
+  //   },
+  //   [openOptions],
+  // );
 
   const toggleBottomSheet = () => {
     if (openOptions) {
@@ -59,27 +59,27 @@ const Home = ({theme}) => {
     setOptions(!openOptions);
   };
 
-  const selectAccount = e => {
-    setChecked(e?.currencyIsoCode);
-    setSeletedAccount(e?.id - 1);
-  };
+  // const selectAccount = e => {
+  //   setChecked(e?.currencyIsoCode);
+  //   setSeletedAccount(e?.id - 1);
+  // };
 
   // render
-  const renderItem = useCallback(
-    ({item}) => (
-      <View style={styles.itemRender}>
-        <Checkbox.Item
-          onPress={() => selectAccount(item)}
-          label={item?.currencyIsoCode}
-          value={item?.currencyIsoCode}
-          status={checked === item?.currencyIsoCode ? 'checked' : 'unchecked'}
-          color={colors.primary}
-          labelStyle={styles.renderLabel}
-        />
-      </View>
-    ),
-    [checked, colors.primary],
-  );
+  // const renderItem = useCallback(
+  //   ({item}) => (
+  //     <View style={styles.itemRender}>
+  //       <Checkbox.Item
+  //         onPress={() => selectAccount(item)}
+  //         label={item?.currencyIsoCode}
+  //         value={item?.currencyIsoCode}
+  //         status={checked === item?.currencyIsoCode ? 'checked' : 'unchecked'}
+  //         color={colors.primary}
+  //         labelStyle={styles.renderLabel}
+  //       />
+  //     </View>
+  //   ),
+  //   [checked, colors.primary],
+  // );
 
   //render Modal
   const renderModal = () => {
@@ -151,18 +151,11 @@ const Home = ({theme}) => {
               />
             </TouchableOpacity>{' '}
           </Title>
-          <TouchableOpacity onPress={toggleBottomSheet}>
-            <Title style={styles.amount}>
-              {hideAmount
-                ? '*'.repeat(5)
-                : `${user?.accounts[seletedAccount]?.currentBalance} ${user?.accounts[seletedAccount]?.currencyIsoCode}`}{' '}
-              <Icon
-                name={openOptions ? 'chevron-up' : 'chevron-down'}
-                size={23}
-                color={colors.white}
-              />
-            </Title>
-          </TouchableOpacity>
+          <Title style={styles.amount}>
+            {hideAmount
+              ? '*'.repeat(5)
+              : `${user?.walletAddress?.final_balance} USDT`}{' '}
+          </Title>
         </View>
         <View style={styles.viewBtn}>
           <View style={styles.btn}>
@@ -220,7 +213,7 @@ const Home = ({theme}) => {
         </View>
       </View>
       <Title style={styles.transactionTitle}>Mes Transactions</Title>
-      <FlatList
+      {/* <FlatList
         data={user?.accounts[seletedAccount]?.balances}
         ListEmptyComponent={RenderEmpty}
         keyExtractor={item => item.id}
@@ -229,8 +222,8 @@ const Home = ({theme}) => {
             <Transaction data={item} />
           </TouchableOpacity>
         )}
-      />
-      <BottomSheet
+      /> */}
+      {/* <BottomSheet
         enablePanDownToClose={true}
         ref={bottomSheetRef}
         index={indexBottomRef}
@@ -242,7 +235,7 @@ const Home = ({theme}) => {
           renderItem={renderItem}
           contentContainerStyle={styles.contentContainer}
         />
-      </BottomSheet>
+      </BottomSheet> */}
       {renderModal()}
     </View>
   );

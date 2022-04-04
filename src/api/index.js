@@ -1,17 +1,19 @@
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 import storage from '@react-native-firebase/storage';
-import * as URL from './url.json';
+import {API_TOKEN} from './env';
+import URL from './url.json';
 
 const db = firestore();
 
 export const register = async data => {
-  try {
-    const {email, password, fullName, phone, currency, country} = data;
-    const res = await auth().createUserWithEmailAndPassword(email, password);
-    if (res.user) {
-      const subscriber = await CreateSubscriber(email, res.user.uid, country);
-      if (Object.keys(subscriber).length) {
+  const {email, password, fullName, phone, country} = data;
+  const res = await auth().createUserWithEmailAndPassword(email, password);
+  if (res?.user) {
+    const wallet = await createWallet(res?.user?.uid, fullName);
+    if (wallet) {
+      const address = await getWalletAddress(wallet?.id);
+      if (address?.data.length) {
         await db
           .collection('users')
           .doc(res.user.uid)
@@ -19,40 +21,19 @@ export const register = async data => {
             uid: res.user.uid,
             email: res.user.email,
             fullName: fullName,
-            subscriberId: subscriber?.subscriber_id,
-            customerId: subscriber?.id,
             phoneNumber: phone,
+            wallet: {...wallet},
             country,
             photoURL: res.user.photoURL,
             creationTime: res.user.metadata.creationTime,
             isActive: false,
-            accounts: [
-              {
-                id: 1,
-                balances: [],
-                createdDate: res.user.metadata.creationTime,
-                currencyIsoCode: currency,
-                currentBalance: 0,
-              },
-              {
-                id: 2,
-                balances: [],
-                createdDate: res.user.metadata.creationTime,
-                currencyIsoCode: 'USDT',
-                currentBalance: 0,
-              },
-            ],
+            walletAddress: {...address?.data[0]},
           });
+        return res?.user;
       }
-      return res.user;
     }
-  } catch (error) {
-    if (error.code === 'auth/email-already-in-use') {
-      return 'That email address is already in use!';
-    }
-    if (error.code === 'auth/invalid-email') {
-      return 'That email address is invalid!';
-    }
+  } else {
+    return 'Please verify your email address or password';
   }
 };
 
@@ -85,8 +66,8 @@ export const updateProfile = async (user, data) => {
     .update({
       fullName: data?.fullName ?? user?.fullName,
       phoneNumber: data?.phoneNumber ?? user?.phoneNumber,
-      photoURL: user?.photoURL ?? data?.photoURL,
-      kycFiles: user?.kycFiles ?? data?.kycFiles,
+      photoURL: data?.photoURL ?? '',
+      kycFiles: data?.kycFiles ?? [],
       updatedAt: new Date().toISOString(),
     });
   return await getProfile(user?.uid);
@@ -139,18 +120,46 @@ export const getCurrencies = async () => {
   }
 };
 
-export const CreateSubscriber = async (email, subscriber_id, country) => {
+const createWallet = async (userId, userName) => {
+  const body = {
+    name: `user-${userId}-crypto_usdt`,
+    currency: 'USDTETH',
+    human: `Owner ${userName}`,
+    description: 'Main account',
+  };
   const params = {
     method: 'POST',
     headers: {
-      accept: '*/*',
-      'Content-type': 'application/json',
-      authorization: 'Bearer 6sLBc6kGEmtYPQXWhKqUV9VsfmTH_h3q1zAnPsNx',
+      authorization: `Bearer ${API_TOKEN}`,
+      'Content-Type': 'application/json',
+      'Idempotency-Key': `${new Date().getTime()}`,
     },
-    body: JSON.stringify({email, subscriber_id, country}),
+    body: JSON.stringify({...body}),
   };
-  const res = await fetch(URL.subscriber, params);
-  if (res.status === 200) {
-    return await res.json();
+  const req = await fetch(URL.createwallet, params);
+  if (req.status === 201) {
+    const {data} = await req.json();
+    return data;
+  } else {
+    console.log('ERROR CREATE Wallet: ', await req?.text());
+  }
+};
+
+const getWalletAddress = async walletId => {
+  const params = {
+    method: 'GET',
+    headers: {
+      accept: '*/*',
+      authorization: `Bearer ${API_TOKEN}`,
+      'Content-Type': 'application/json',
+    },
+  };
+  const addressURL = `${URL.createwallet}/${walletId}/addresses/`;
+  const req = await fetch(addressURL, params);
+  if (req?.status === 200) {
+    const res = await req.json();
+    return res;
+  } else {
+    console.log('Get Wallet: ', await req?.text());
   }
 };
