@@ -5,22 +5,8 @@ import React, {
   useEffect,
   useCallback,
 } from 'react';
-import {
-  StyleSheet,
-  View,
-  Dimensions,
-  Modal,
-  TouchableOpacity,
-  Alert,
-} from 'react-native';
-import {
-  withTheme,
-  Text,
-  Paragraph,
-  Button,
-  TextInput,
-  Avatar,
-} from 'react-native-paper';
+import {StyleSheet, View, Dimensions, Alert} from 'react-native';
+import {withTheme, Text, Button, TextInput, Avatar} from 'react-native-paper';
 import {VirtualKeyboard} from 'react-native-screen-keyboard';
 import Loader from '../components/Loader';
 import {UserContext} from '../context';
@@ -45,39 +31,6 @@ const Deposit = ({theme}) => {
     [7, 8, 9],
     ['', 0, <Icon name={'arrow-back-outline'} color={colors.text} size={35} />],
   ];
-
-  const renderModal = () => {
-    return (
-      <Modal
-        animationType="fade"
-        style={styles.modal}
-        transparent={false}
-        visible={showModal}
-        onRequestClose={() => setShowModal(false)}>
-        <View style={styles.modalContent}>
-          <View style={styles.modalContentClose}>
-            <TouchableOpacity onPress={() => setShowModal(false)}>
-              <Icon name="close-outline" size={40} color={colors.black} />
-            </TouchableOpacity>
-          </View>
-          <>
-            <Text>common.helpquestion</Text>
-            <>
-              <View style={styles.card}>
-                <Text>common.forgotpasscode</Text>
-              </View>
-              <View style={styles.card}>
-                <Text>common.contactus</Text>
-              </View>
-              <View style={styles.card}>
-                <Text>common.paymentissuetext</Text>
-              </View>
-            </>
-          </>
-        </View>
-      </Modal>
-    );
-  };
 
   const handleFees = useCallback(() => {
     const XOFUSDT = 0.0017;
@@ -159,7 +112,6 @@ const Deposit = ({theme}) => {
         theme={{roundness: 20}}>
         Faire le depot
       </Button>
-      {renderModal()}
     </View>
   );
 };

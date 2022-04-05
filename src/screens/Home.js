@@ -193,10 +193,10 @@ const Home = ({theme}) => {
               icon="arrow-bottom-right"
               labelStyle={styles.labelStyle}
               mode="contained"
-              onPress={() => console.log('Pressed')}
+              onPress={() => navigate('WithDrawal')}
               theme={{roundness: 10}}
             />
-            <Text style={styles.btnText}>Retirer</Text>
+            <Text style={styles.btnText}>Retrait</Text>
           </View>
           <View style={styles.btn}>
             <Button

@@ -15,11 +15,9 @@ import {
 import {
   withTheme,
   Text,
-  Title,
   Button,
   TextInput,
   Avatar,
-  Caption,
   Paragraph,
 } from 'react-native-paper';
 import {VirtualKeyboard} from 'react-native-screen-keyboard';

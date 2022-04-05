@@ -2,7 +2,6 @@ import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {withTheme} from 'react-native-paper';
 import Home from '../screens/Home';
-import SendCrypto from '../screens/SendCrypto';
 import ConfirmIdentity from '../screens/ConfirmIdentity';
 import Settings from '../screens/Settings';
 import Activity from '../screens/Activity';
@@ -10,6 +9,7 @@ import Profile from '../screens/Profile';
 import SendTether from '../screens/SendTether';
 import SendTetherSuccess from '../screens/SendTetherSuccess';
 import Deposit from '../screens/Deposit';
+import WithDrawal from '../screens/WithDrawal';
 import PaymentMethod from '../screens/PaymentMethod';
 
 const Stack = createNativeStackNavigator();
@@ -47,10 +47,10 @@ const AuthStack = () => {
         }}
       />
       <Stack.Screen
-        name="Profile"
-        component={Profile}
+        name="WithDrawal"
+        component={WithDrawal}
         options={{
-          headerTitle: 'Profil utilisateur',
+          headerTitle: "Retrait d'argent",
           headerBackTitle: 'Retour',
           headerTitleStyle: {
             fontFamily: 'ProductSans-Medium',
@@ -58,10 +58,10 @@ const AuthStack = () => {
         }}
       />
       <Stack.Screen
-        name="SendCrypto"
-        component={SendCrypto}
+        name="Profile"
+        component={Profile}
         options={{
-          headerTitle: 'Envoyer',
+          headerTitle: 'Profil utilisateur',
           headerBackTitle: 'Retour',
           headerTitleStyle: {
             fontFamily: 'ProductSans-Medium',
