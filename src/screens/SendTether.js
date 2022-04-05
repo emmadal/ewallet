@@ -1,4 +1,10 @@
-import React, {useRef, useContext, useState} from 'react';
+import React, {
+  useRef,
+  useContext,
+  useState,
+  useCallback,
+  useEffect,
+} from 'react';
 import {
   StyleSheet,
   View,
@@ -14,6 +20,7 @@ import {
   TextInput,
   Avatar,
   Caption,
+  Paragraph,
 } from 'react-native-paper';
 import {VirtualKeyboard} from 'react-native-screen-keyboard';
 import Loader from '../components/Loader';
@@ -24,6 +31,7 @@ import {useNavigation} from '@react-navigation/native';
 const SendTether = ({theme}) => {
   const {colors} = theme;
   const [amount, setAmount] = useState(0);
+  const [xof, setXOF] = useState(0);
   const [loading, setLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [address, setAddress] = useState('');
@@ -35,11 +43,7 @@ const SendTether = ({theme}) => {
     [1, 2, 3],
     [4, 5, 6],
     [7, 8, 9],
-    [
-      '',
-      0,
-      <Icon name={'arrow-back-outline'} color={colors.black} size={35} />,
-    ],
+    ['', 0, <Icon name={'arrow-back-outline'} color={colors.text} size={35} />],
   ];
 
   const renderModal = () => {
@@ -83,6 +87,16 @@ const SendTether = ({theme}) => {
     // setLoading(!loading);
   };
 
+  const handleFees = useCallback(() => {
+    const USDTXOF = 590;
+    const fees = 0.01;
+    const USDTXOFWithAmount = USDTXOF * amount;
+    const total = USDTXOFWithAmount + fees * USDTXOFWithAmount;
+    setXOF(total);
+  }, [amount]);
+
+  useEffect(() => handleFees(), [handleFees]);
+
   return (
     <View style={styles.container}>
       <Loader loading={loading} />
@@ -92,14 +106,15 @@ const SendTether = ({theme}) => {
           source={require('../assets/tether-logo.png')}
           style={styles.logo}
         />
-        <Title style={styles.title}>Envoyer du Tether</Title>
-        <Caption style={styles.caption}>
-          Entrer le montant que vous voulez envoyer
-        </Caption>
+        <Paragraph style={styles.caption}>1 USDT = 590 XOF</Paragraph>
+        <Paragraph style={[{color: colors.primary}, styles.caption]}>
+          Frais de transfert 1%
+        </Paragraph>
       </View>
       <View style={styles.containerInput}>
         <TextInput
           style={styles.inputFlat}
+          underlineColorAndroid="transparent"
           editable={false}
           mode="flat"
           label="USDT"
@@ -112,11 +127,14 @@ const SendTether = ({theme}) => {
           editable={false}
           mode="flat"
           label="XOF"
+          value={String(xof)}
+          onChangeText={text => setXOF(Number(text))}
           right={<TextInput.Icon name="wallet" />}
         />
         <TextInput
           style={styles.inputAddress}
           autoCapitalize="none"
+          underlineColorAndroid="transparent"
           label="Coller l'adresse"
           value={address}
           onChangeText={text => setAddress(text)}
@@ -159,6 +177,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 17,
     backgroundColor: 'white',
   },
+  logo: {
+    marginBottom: 10,
+  },
   containerLogo: {
     alignItems: 'center',
     marginTop: 25,
@@ -172,7 +193,8 @@ const styles = StyleSheet.create({
   },
   caption: {
     fontSize: 15,
-    fontFamily: 'ProductSans-Light',
+    fontFamily: 'ProductSans-Bold',
+    textAlign: 'center',
   },
   inputFlat: {
     backgroundColor: 'transparent',

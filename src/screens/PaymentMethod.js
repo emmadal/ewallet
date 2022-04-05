@@ -33,12 +33,12 @@ const PaymentMethod = ({theme, route}) => {
         <View style={styles.modalContent}>
           <View style={styles.modalContentClose}>
             <TouchableOpacity onPress={() => setModal(false)}>
-              <Icon name="close-outline" size={50} color={colors.black} />
+              <Icon name="close-outline" size={50} color={colors.text} />
             </TouchableOpacity>
           </View>
           <View style={styles.modalCreditCard}>
             <Title style={[{color: colors.danger}, styles.modalText]}>
-             Remplissez les champs suivants
+              Remplissez les champs suivants
             </Title>
             <CreditCardInput
               requiresName={true}
@@ -111,10 +111,10 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   title: {
-    fontSize: 21,
+    fontSize: 18,
     fontFamily: 'ProductSans-Bold',
     textAlign: 'center',
-    paddingVertical: 40,
+    paddingVertical: 30,
   },
   btn: {
     width: Dimensions.get('window').width / 1.5,
@@ -128,8 +128,8 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
   img: {
-    height: 80,
-    width: 80,
+    height: 60,
+    width: 60,
   },
   rows: {
     flex: 1,
@@ -140,7 +140,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     borderRadius: 20,
     marginVertical: 10,
-    padding: 7,
+    padding: 5,
   },
   modal: {
     position: 'relative',
@@ -153,7 +153,7 @@ const styles = StyleSheet.create({
     display: 'flex',
   },
   modalContentClose: {
-    top: 20,
+    top: 30,
     alignItems: 'flex-end',
     height: 70,
   },

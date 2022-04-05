@@ -16,11 +16,10 @@ import {
 import {
   withTheme,
   Text,
-  Title,
+  Paragraph,
   Button,
   TextInput,
   Avatar,
-  Caption,
 } from 'react-native-paper';
 import {VirtualKeyboard} from 'react-native-screen-keyboard';
 import Loader from '../components/Loader';
@@ -44,11 +43,7 @@ const Deposit = ({theme}) => {
     [1, 2, 3],
     [4, 5, 6],
     [7, 8, 9],
-    [
-      '',
-      0,
-      <Icon name={'arrow-back-outline'} color={colors.black} size={35} />,
-    ],
+    ['', 0, <Icon name={'arrow-back-outline'} color={colors.text} size={35} />],
   ];
 
   const renderModal = () => {
@@ -84,7 +79,11 @@ const Deposit = ({theme}) => {
     );
   };
 
-  const handleFees = useCallback(() => setEth(amount * 0.0017), [amount]);
+  const handleFees = useCallback(() => {
+    const XOFUSDT = 0.0017;
+    const XOFUSDTWithAmount = XOFUSDT * amount;
+    setEth(XOFUSDTWithAmount);
+  }, [amount]);
 
   const handleDepositThether = () => {
     if (amount < MINIMUM_AMOUNT) {
@@ -105,14 +104,13 @@ const Deposit = ({theme}) => {
           source={require('../assets/tether-logo.png')}
           style={styles.logo}
         />
-        <Title style={styles.title}>Faire un dépot sur votre wallet</Title>
-        <Caption style={styles.caption}>
-          Entrez le montant que vous voulez déposer
-        </Caption>
+        <Text style={styles.caption}>1 XOF = 0.0017 USDT</Text>
       </View>
       <View style={styles.containerInput}>
         <TextInput
           style={styles.inputFlat}
+          editable={false}
+          underlineColorAndroid="transparent"
           mode="flat"
           label="XOF"
           right={<TextInput.Icon name="wallet-outline" />}
@@ -130,7 +128,6 @@ const Deposit = ({theme}) => {
         />
         <TextInput
           style={styles.inputAddress}
-          editable={false}
           autoCapitalize="none"
           label="Votre adresse"
           value={user?.walletAddress?.address}
@@ -173,6 +170,14 @@ const styles = StyleSheet.create({
     paddingHorizontal: 17,
     backgroundColor: 'white',
   },
+  logo: {
+    marginBottom: 10,
+  },
+  caption: {
+    fontSize: 15,
+    fontFamily: 'ProductSans-Bold',
+    textAlign: 'center',
+  },
   containerLogo: {
     alignItems: 'center',
     marginTop: 25,
@@ -183,10 +188,6 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 18,
     fontFamily: 'ProductSans-Bold',
-  },
-  caption: {
-    fontSize: 15,
-    fontFamily: 'ProductSans-Light',
   },
   inputFlat: {
     backgroundColor: 'transparent',

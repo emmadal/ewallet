@@ -43,6 +43,8 @@ const OnboardingUserName = ({theme, route}) => {
       <TextInput
         style={styles.input}
         maxLength={17}
+        autoFocus={true}
+        underlineColorAndroid="transparent"
         autoCapitalize="none"
         value={name}
         label="Nom & Prénom"
@@ -52,6 +54,8 @@ const OnboardingUserName = ({theme, route}) => {
       <TextInput
         style={styles.input}
         autoCapitalize="none"
+        autoFocus={true}
+        underlineColorAndroid="transparent"
         keyboardType="email-address"
         value={email}
         label="Email"
@@ -62,6 +66,8 @@ const OnboardingUserName = ({theme, route}) => {
         style={styles.input}
         minLength={8}
         secureTextEntry={true}
+        autoFocus={true}
+        underlineColorAndroid="transparent"
         autoCapitalize="none"
         value={password}
         label="Mot de passe"

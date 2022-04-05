@@ -17,11 +17,7 @@ const SendCrypto = ({theme}) => {
     [1, 2, 3],
     [4, 5, 6],
     [7, 8, 9],
-    [
-      '',
-      0,
-      <Icon name={'arrow-back-outline'} color={colors.black} size={35} />,
-    ],
+    ['', 0, <Icon name={'arrow-back-outline'} color={colors.text} size={35} />],
   ];
 
   return (

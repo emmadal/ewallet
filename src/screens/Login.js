@@ -49,8 +49,9 @@ const Login = ({theme}) => {
       </View>
       <TextInput
         style={styles.input}
-        autoFocus={true}
         autoCapitalize="none"
+        autoFocus={true}
+        underlineColorAndroid="transparent"
         keyboardType="email-address"
         value={email}
         label="Email"
@@ -60,6 +61,8 @@ const Login = ({theme}) => {
       <TextInput
         style={styles.input}
         minLength={8}
+        autoFocus={true}
+        underlineColorAndroid="transparent"
         secureTextEntry={true}
         autoCapitalize="none"
         value={password}
