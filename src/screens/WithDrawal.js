@@ -40,7 +40,6 @@ const WithDrawal = ({theme}) => {
   const [showModal, setShowModal] = useState(false);
   const {user} = useContext(UserContext);
   const [checked, setChecked] = useState({});
-  const [openOptions, setOptions] = useState(false);
   const [indexBottomRef, setIndexBottomRef] = useState(-1);
   const [phoneNumber, setPhoneNumber] = useState(user?.phoneNumber ?? '');
   const [cardNumber, setCardNumber] = useState('');
@@ -52,25 +51,16 @@ const WithDrawal = ({theme}) => {
   // variables
   const snapPoints = useMemo(() => ['25%', '45%', '60%'], []);
 
-  const handleSheetChanges = useCallback(
-    index => {
-      if (index === -1 && openOptions) {
-        setOptions(!openOptions);
-      }
-    },
-    [openOptions],
-  );
+  const handleSheetChanges = useCallback(index => {
+    console.log(index);
+  }, []);
 
-  const toggleBottomSheet = () => {
-    if (openOptions) {
-      bottomSheetRef.current?.close();
-    } else {
-      bottomSheetRef.current?.expand();
-    }
-    setOptions(!openOptions);
+  const toggleBottomSheet = () => bottomSheetRef.current?.expand();
+
+  const handleMethod = item => {
+    setChecked(item);
+    bottomSheetRef.current?.close();
   };
-
-  const handleMethod = item => setChecked(item);
 
   // render
   const renderItem = useCallback(
@@ -172,6 +162,7 @@ const WithDrawal = ({theme}) => {
         <Title style={styles.methodTitle}>Montant a retirer</Title>
         <TextInput
           style={styles.inputFlat}
+          keyboardType="number-pad"
           underlineColorAndroid="transparent"
           label="USDT"
           mode="outlined"
@@ -193,17 +184,18 @@ const WithDrawal = ({theme}) => {
         <Title style={styles.methodTitle}>Methode de retrait</Title>
         <TextInput
           style={styles.inputFlat}
-          editable={false}
+          editable={true}
           onPressIn={toggleBottomSheet}
           underlineColorAndroid="transparent"
           label="Choisir la methode"
           placeholder="Choisir la methode"
-          value={checked?.name ?? ''}
+          value={checked?.name}
           mode="outlined"
           right={<TextInput.Icon name="chevron-right" />}
         />
         <TextInput
           style={styles.inputFlat}
+          keyboardType="number-pad"
           underlineColorAndroid="transparent"
           label={
             checked?.name === 'Credit Card'
@@ -233,7 +225,6 @@ const WithDrawal = ({theme}) => {
         Retirer
       </Button>
       <BottomSheet
-        enablePanDownToClose={true}
         ref={bottomSheetRef}
         index={indexBottomRef}
         onChange={handleSheetChanges}

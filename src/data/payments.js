@@ -7,7 +7,7 @@ export const payments = [
   {
     id: 2,
     name: 'Credit Card',
-    logo: require('../assets/creditcard.png'),
+    logo: require('../assets/bankcard.png'),
   },
   {
     id: 3,
