@@ -1,5 +1,5 @@
 diff --git a/node_modules/react-native-credit-card-input/src/CCInput.js b/node_modules/react-native-credit-card-input/src/CCInput.js
-index dde3aec..57b9451 100644
+index dde3aec..4a66fa4 100644
 --- a/node_modules/react-native-credit-card-input/src/CCInput.js
 +++ b/node_modules/react-native-credit-card-input/src/CCInput.js
 @@ -12,6 +12,8 @@ import {
@@ -11,14 +11,36 @@ index dde3aec..57b9451 100644
    },
  });
  
-@@ -78,7 +80,6 @@ export default class CCInput extends Component {
-           { !!label && <Text style={[labelStyle]}>{label}</Text>}
+@@ -70,7 +72,7 @@ export default class CCInput extends Component {
+     const { label, value, placeholder, status, keyboardType,
+             containerStyle, inputStyle, labelStyle,
+             validColor, invalidColor, placeholderColor,
+-            additionalInputProps } = this.props;
++            additionalInputProps, maxLength } = this.props;
+     return (
+       <TouchableOpacity onPress={this.focus}
+         activeOpacity={0.99}>
+@@ -79,6 +81,7 @@ export default class CCInput extends Component {
            <TextInput ref="input"
              {...additionalInputProps}
--            keyboardType={keyboardType}
+             keyboardType={keyboardType}
++            maxLength={maxLength}
              autoCapitalise="words"
              autoCorrect={false}
              style={[
+diff --git a/node_modules/react-native-credit-card-input/src/CardView.js b/node_modules/react-native-credit-card-input/src/CardView.js
+index 96510cd..a7e9625 100644
+--- a/node_modules/react-native-credit-card-input/src/CardView.js
++++ b/node_modules/react-native-credit-card-input/src/CardView.js
+@@ -104,7 +104,7 @@ export default class CardView extends Component {
+     },
+ 
+     scale: 1,
+-    fontFamily: Platform.select({ ios: "Courier", android: "monospace" }),
++    fontFamily: Platform.select({ ios: "ProductSans-Bold", android: "ProductSans-Bold" }),
+     imageFront: require("../images/card-front.png"),
+     imageBack: require("../images/card-back.png"),
+   };
 diff --git a/node_modules/react-native-credit-card-input/src/CreditCardInput.js b/node_modules/react-native-credit-card-input/src/CreditCardInput.js
 index 44f43c8..be19d08 100644
 --- a/node_modules/react-native-credit-card-input/src/CreditCardInput.js
