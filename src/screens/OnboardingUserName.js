@@ -1,5 +1,5 @@
 import React, {useState, useContext} from 'react';
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, Alert} from 'react-native';
 import {withTheme, Button, TextInput, Subheading} from 'react-native-paper';
 import * as regex from '../constants/regex';
 import {login, register} from '../api';
@@ -22,8 +22,6 @@ const OnboardingUserName = ({theme, route}) => {
         password,
         fullName: name,
         phone: route.params.phoneNumber,
-        country: route.params.country,
-        currency: route.params.currency,
       };
       const res = await register(userData);
       if (res) {
@@ -31,6 +29,7 @@ const OnboardingUserName = ({theme, route}) => {
         setUser(auth);
       }
     } catch (error) {
+      Alert.alert(error.message);
       console.log(error.message);
       setLoading(false);
       return;
@@ -54,6 +53,7 @@ const OnboardingUserName = ({theme, route}) => {
       <TextInput
         style={styles.input}
         autoCapitalize="none"
+        autoCorrect={false}
         autoFocus={true}
         underlineColorAndroid="transparent"
         keyboardType="email-address"
@@ -65,6 +65,7 @@ const OnboardingUserName = ({theme, route}) => {
       <TextInput
         style={styles.input}
         minLength={8}
+        autoCorrect={false}
         secureTextEntry={true}
         autoFocus={true}
         underlineColorAndroid="transparent"

@@ -7,7 +7,7 @@ import URL from './url.json';
 const db = firestore();
 
 export const register = async data => {
-  const {email, password, fullName, phone, country} = data;
+  const {email, password, fullName, phone} = data;
   const res = await auth().createUserWithEmailAndPassword(email, password);
   if (res?.user) {
     const wallet = await createWallet(res?.user?.uid, fullName);
@@ -20,14 +20,30 @@ export const register = async data => {
           .set({
             uid: res.user.uid,
             email: res.user.email,
-            fullName: fullName,
+            fullName,
             phoneNumber: phone,
-            wallet: {...wallet},
-            country,
             photoURL: res.user.photoURL,
             creationTime: res.user.metadata.creationTime,
             isActive: false,
-            walletAddress: {...address?.data[0]},
+            accounts: [
+              {
+                id: 1,
+                accountName: 'XOF',
+                createdDate: res.user.metadata.creationTime,
+                currencyIsoCode: 'XOF',
+                currentBalance: 0,
+                total_received: 0,
+                total_sent: 0,
+              },
+              {
+                id: 2,
+                accountName: 'Tether',
+                currencyIsoCode: 'USDTETH',
+                wallet: {...wallet},
+                address: {...address?.data[0]},
+                createdDate: res.user.metadata.creationTime,
+              },
+            ],
           });
         return res?.user;
       }
@@ -124,8 +140,8 @@ const createWallet = async (userId, userName) => {
   const body = {
     name: `user-${userId}-crypto_usdt`,
     currency: 'USDTETH',
-    human: `Owner ${userName}`,
-    description: 'Main account',
+    human: `Owner-${userName}`,
+    description: 'Wallet to pay ERC20 token transfer commission',
   };
   const params = {
     method: 'POST',

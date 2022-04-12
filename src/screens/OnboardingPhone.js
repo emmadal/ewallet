@@ -35,8 +35,6 @@ const OnboardingPhone = ({theme, navigation}) => {
         onPress={() =>
           navigation.navigate('OnboardingUserName', {
             phoneNumber: formattedValue,
-            country: country?.name,
-            currency: country?.currency,
           })
         }
         style={styles.btn}
