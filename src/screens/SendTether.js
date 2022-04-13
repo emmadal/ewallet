@@ -1,10 +1,4 @@
-import React, {
-  useRef,
-  useContext,
-  useState,
-  useCallback,
-  useEffect,
-} from 'react';
+import React, {useState, useCallback, useEffect} from 'react';
 import {
   StyleSheet,
   View,
@@ -20,29 +14,19 @@ import {
   Avatar,
   Paragraph,
 } from 'react-native-paper';
-import {VirtualKeyboard} from 'react-native-screen-keyboard';
-import Loader from '../components/Loader';
-import {UserContext} from '../context';
+import VirtualKeyboard from 'react-native-virtual-keyboard';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {useNavigation} from '@react-navigation/native';
+import Loader from '../components/Loader';
 
-const SendTether = ({theme}) => {
+const SendTether = ({theme, route}) => {
   const {colors} = theme;
-  const [amount, setAmount] = useState(0);
+  const [amount, setAmount] = useState(route?.params?.senderAmount ?? 0);
   const [xof, setXOF] = useState(0);
   const [loading, setLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  const [address, setAddress] = useState('');
-  const keyboardRef = useRef(null);
-  const {user} = useContext(UserContext);
+  const [address, setAddress] = useState(route?.params?.senderAddress ?? '');
   const {navigate} = useNavigation();
-
-  const keyboardSetting = [
-    [1, 2, 3],
-    [4, 5, 6],
-    [7, 8, 9],
-    ['', 0, <Icon name={'arrow-back-outline'} color={colors.text} size={35} />],
-  ];
 
   const renderModal = () => {
     return (
@@ -82,7 +66,6 @@ const SendTether = ({theme}) => {
       recipientWallet: address,
       cryptoAmount: amount,
     });
-    // setLoading(!loading);
   };
 
   const handleFees = useCallback(() => {
@@ -117,7 +100,7 @@ const SendTether = ({theme}) => {
           mode="flat"
           label="USDT"
           right={<TextInput.Icon name="wallet-outline" />}
-          value={amount}
+          value={String(amount)}
           onChangeText={text => setAmount(Number(text))}
         />
         <TextInput
@@ -127,7 +110,7 @@ const SendTether = ({theme}) => {
           label="XOF"
           value={String(xof)}
           onChangeText={text => setXOF(Number(text))}
-          right={<TextInput.Icon name="wallet" />}
+          right={<TextInput.Icon name="wallet-outline" />}
         />
         <TextInput
           style={styles.inputAddress}
@@ -141,18 +124,10 @@ const SendTether = ({theme}) => {
       </View>
       <View style={styles.keyboardView}>
         <VirtualKeyboard
-          onRef={ref => {
-            return (keyboardRef.current = ref);
-          }}
-          keyStyle={styles.keyStyle}
-          onChange={val => {
-            if (val) {
-              setAmount(val);
-            } else {
-              setAmount(0);
-            }
-          }}
-          keyboard={keyboardSetting}
+          decimal={true}
+          color="black"
+          pressMode="string"
+          onPress={val => setAmount(val)}
         />
       </View>
       <Button
@@ -205,15 +180,12 @@ const styles = StyleSheet.create({
     fontFamily: 'ProductSans-Bold',
     fontSize: 18,
   },
-  keyboardView: {
-    paddingTop: 15,
-  },
   btn: {
     width: Dimensions.get('window').width / 1.5,
     justifyContent: 'center',
     padding: 3,
     alignSelf: 'center',
-    marginTop: 20,
+    marginTop: 30,
   },
   keyStyle: {
     borderRightWidth: 0,

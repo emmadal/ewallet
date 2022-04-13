@@ -89,10 +89,8 @@ const Request = ({theme}) => {
           id: new Date().getTime(),
           status: 'unpaid',
           senderAddress: address,
-          senderPhone: user?.phoneNumber,
           senderUserFullName: user?.fullName,
-          senderPhotoURL: user?.photoURL,
-          created_at: new Date(),
+          payeeUsername: recipient?.fullName,
           senderAmount: amount,
           senderNote: notes ?? 'Pouvez vous recharger mon compte SVP',
         };
@@ -114,8 +112,6 @@ const Request = ({theme}) => {
     payee,
     showModal,
     user?.fullName,
-    user?.phoneNumber,
-    user?.photoURL,
     user?.uid,
   ]);
 

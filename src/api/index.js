@@ -91,16 +91,27 @@ export const sentRequest = async (data, payeeId, senderId) => {
   const query = await db.collection('users').where('uid', '==', payeeId).get();
   if (!query.empty) {
     await Promise.all([
-      db
-        .collection('requests')
-        .doc(payeeId)
-        .set({...data, payeeId, type: 'Receive'}),
-      db
-        .collection('requests')
-        .doc(senderId)
-        .set({...data, senderId, type: 'Sent'}),
+      db.collection('requests').add({
+        ...data,
+        uid: payeeId,
+        type: 'Receive',
+        created_at: firestore.FieldValue.serverTimestamp(),
+      }),
+      db.collection('requests').add({
+        ...data,
+        uid: senderId,
+        type: 'Sent',
+        created_at: firestore.FieldValue.serverTimestamp(),
+      }),
     ]);
     return await getProfile(senderId);
+  }
+};
+
+export const getRequests = async uid => {
+  const query = await db.collection('requests').where('uid', '==', uid).get();
+  if (!query.empty) {
+    return query.docs;
   }
 };
 
