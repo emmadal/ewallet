@@ -115,6 +115,21 @@ export const getRequests = async uid => {
   }
 };
 
+export const getOffers = async () => {
+  const query = await db.collection('offers').get();
+  if (!query.empty) {
+    return query.docs;
+  }
+};
+
+export const createOffer = async data => {
+  await db.collection('offers').add({
+    ...data,
+    created_at: firestore.FieldValue.serverTimestamp(),
+  });
+  return await getOffers();
+};
+
 export const updateProfile = async (user, data) => {
   await db
     .collection('users')

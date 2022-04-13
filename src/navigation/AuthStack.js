@@ -7,6 +7,7 @@ import Settings from '../screens/Settings';
 import Activity from '../screens/Activity';
 import Profile from '../screens/Profile';
 import SendTether from '../screens/SendTether';
+import SellCrypto from '../screens/SellCrypto';
 import Request from '../screens/Request';
 import SendTetherSuccess from '../screens/SendTetherSuccess';
 import Deposit from '../screens/Deposit';
@@ -85,6 +86,17 @@ const AuthStack = () => {
         component={Request}
         options={{
           headerTitle: 'Demande de paiement',
+          headerBackTitle: 'Retour',
+          headerTitleStyle: {
+            fontFamily: 'ProductSans-Medium',
+          },
+        }}
+      />
+      <Stack.Screen
+        name="SellCrypto"
+        component={SellCrypto}
+        options={{
+          headerTitle: 'Ventes de crypto',
           headerBackTitle: 'Retour',
           headerTitleStyle: {
             fontFamily: 'ProductSans-Medium',

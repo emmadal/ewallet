@@ -219,7 +219,9 @@ const Home = ({theme}) => {
               compact={true}
               labelStyle={styles.labelStyle}
               mode="contained"
-              onPress={() => console.log('Pressed')}
+              onPress={() =>
+                user?.isActive ? navigate('SellCrypto') : setModal(!showModal)
+              }
               theme={{roundness: 10}}
             />
             <Text style={styles.btnText}>Vendre</Text>
