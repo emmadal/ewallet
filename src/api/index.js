@@ -92,13 +92,13 @@ export const sentRequest = async (data, payeeId, senderId) => {
   if (!query.empty) {
     await Promise.all([
       db
-        .collection('users')
+        .collection('requests')
         .doc(payeeId)
-        .update({requestReceived: {...data, type: 'Receive'}}),
+        .set({...data, payeeId, type: 'Receive'}),
       db
-        .collection('users')
+        .collection('requests')
         .doc(senderId)
-        .set({requestSent: {...data, type: 'Sent'}}),
+        .set({...data, senderId, type: 'Sent'}),
     ]);
     return await getProfile(senderId);
   }
