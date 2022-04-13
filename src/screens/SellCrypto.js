@@ -1,4 +1,10 @@
-import React, {useState, useCallback, useEffect, useContext} from 'react';
+import React, {
+  useState,
+  useCallback,
+  useEffect,
+  useContext,
+  useRef,
+} from 'react';
 import {
   StyleSheet,
   View,
@@ -8,7 +14,7 @@ import {
   FlatList,
   Platform,
 } from 'react-native';
-import VirtualKeyboard from 'react-native-virtual-keyboard';
+import {VirtualKeyboard} from 'react-native-screen-keyboard';
 import {
   withTheme,
   Colors,
@@ -16,11 +22,9 @@ import {
   Title,
   Button,
   TextInput,
-  Avatar,
   Caption,
 } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {useNavigation} from '@react-navigation/native';
 import {UserContext} from '../context';
 import Loader from '../components/Loader';
 import {createOffer, getOffers} from '../api';
@@ -30,12 +34,19 @@ const SellCrypto = ({theme, route}) => {
   const [amount, setAmount] = useState('');
   const [xof, setXOF] = useState('');
   const [response, setResponse] = useState([]);
-  const [data, setData] = useState(null);
+  const keyboardRef = useRef(null);
   const {user} = useContext(UserContext);
   const [desc, setDesc] = useState('');
   const [loading, setLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const {address} = user.accounts[1].address;
+
+  const keyboardSetting = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9],
+    ['', 0, <Icon name={'arrow-back-outline'} color={colors.text} size={35} />],
+  ];
 
   const handleFees = useCallback(() => {
     const USDTXOF = 590;
@@ -130,12 +141,22 @@ const SellCrypto = ({theme, route}) => {
               onChangeText={text => setDesc(text)}
             />
           </View>
-          <VirtualKeyboard
-            decimal={true}
-            color="black"
-            pressMode="string"
-            onPress={val => setAmount(val)}
-          />
+          <View style={styles.keyboardView}>
+            <VirtualKeyboard
+              onRef={ref => {
+                return (keyboardRef.current = ref);
+              }}
+              keyStyle={styles.keyStyle}
+              onChange={val => {
+                if (val) {
+                  setAmount(val);
+                } else {
+                  setAmount(0);
+                }
+              }}
+              keyboard={keyboardSetting}
+            />
+          </View>
           <Button
             labelStyle={[{color: colors.white}, styles.labelStyle]}
             mode="contained"
@@ -222,7 +243,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     padding: 3,
     alignSelf: 'center',
-    marginTop: 30,
+    marginTop: 25,
   },
   emptymessage: {
     fontFamily: 'ProductSans-Bold',
@@ -270,6 +291,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     padding: 10,
+  },
+  keyStyle: {
+    borderRightWidth: 0,
+    borderBottomWidth: 0,
   },
 });
 

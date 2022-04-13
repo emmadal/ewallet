@@ -1,7 +1,14 @@
-import React, {useContext, useState, useEffect, useCallback} from 'react';
+import React, {
+  useContext,
+  useState,
+  useEffect,
+  useCallback,
+  useRef,
+} from 'react';
 import {StyleSheet, View, Dimensions, Alert} from 'react-native';
 import {withTheme, Text, Button, TextInput, Avatar} from 'react-native-paper';
-import VirtualKeyboard from 'react-native-virtual-keyboard';
+import {VirtualKeyboard} from 'react-native-screen-keyboard';
+import Icon from 'react-native-vector-icons/Ionicons';
 import Loader from '../components/Loader';
 import {UserContext} from '../context';
 import {useNavigation} from '@react-navigation/native';
@@ -12,9 +19,17 @@ const Deposit = ({theme}) => {
   const [amount, setAmount] = useState(0);
   const [eth, setEth] = useState(0);
   const [loading, setLoading] = useState(false);
+  const keyboardRef = useRef(null);
   const {user} = useContext(UserContext);
   const {navigate} = useNavigation();
   const {address} = user.accounts[1].address;
+
+  const keyboardSetting = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9],
+    ['', 0, <Icon name={'arrow-back-outline'} color={colors.text} size={35} />],
+  ];
 
   const handleFees = useCallback(() => {
     const XOFUSDT = 0.0017;
@@ -73,10 +88,18 @@ const Deposit = ({theme}) => {
       </View>
       <View style={styles.keyboardView}>
         <VirtualKeyboard
-          decimal={true}
-          color="black"
-          pressMode="string"
-          onPress={val => setAmount(val)}
+          onRef={ref => {
+            return (keyboardRef.current = ref);
+          }}
+          keyStyle={styles.keyStyle}
+          onChange={val => {
+            if (val) {
+              setAmount(val);
+            } else {
+              setAmount(0);
+            }
+          }}
+          keyboard={keyboardSetting}
         />
       </View>
       <Button
