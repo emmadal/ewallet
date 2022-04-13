@@ -7,7 +7,7 @@ import URL from './url.json';
 const db = firestore();
 
 export const register = async data => {
-  const {email, password, fullName, phone} = data;
+  const {email, password, fullName, phone, country} = data;
   const res = await auth().createUserWithEmailAndPassword(email, password);
   if (res?.user) {
     const wallet = await createWallet(res?.user?.uid, fullName);
@@ -21,8 +21,10 @@ export const register = async data => {
             uid: res.user.uid,
             email: res.user.email,
             fullName,
+            country,
             phoneNumber: phone,
             photoURL: res.user.photoURL,
+            kycFiles: [],
             creationTime: res.user.metadata.creationTime,
             isActive: false,
             accounts: [
@@ -72,6 +74,33 @@ export const getProfile = async uid => {
   const doc = await db.collection('users').doc(uid).get();
   if (doc.exists) {
     return doc.data();
+  }
+};
+
+export const getUser = async userName => {
+  const query = await db
+    .collection('users')
+    .where('fullName', '==', userName)
+    .get();
+  if (!query.empty) {
+    return query.docs[0]._data;
+  }
+};
+
+export const sentRequest = async (data, payeeId, senderId) => {
+  const query = await db.collection('users').where('uid', '==', payeeId).get();
+  if (!query.empty) {
+    await Promise.all([
+      db
+        .collection('users')
+        .doc(payeeId)
+        .update({requestReceived: {...data, type: 'Receive'}}),
+      db
+        .collection('users')
+        .doc(senderId)
+        .set({requestSent: {...data, type: 'Sent'}}),
+    ]);
+    return await getProfile(senderId);
   }
 };
 

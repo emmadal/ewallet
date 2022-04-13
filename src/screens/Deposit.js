@@ -20,10 +20,10 @@ const Deposit = ({theme}) => {
   const [eth, setEth] = useState(0);
   const [loading, setLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  const [address, setAddress] = useState('');
   const keyboardRef = useRef(null);
   const {user} = useContext(UserContext);
   const {navigate} = useNavigation();
+  const {address} = user.accounts[1].address;
 
   const keyboardSetting = [
     [1, 2, 3],
@@ -83,8 +83,7 @@ const Deposit = ({theme}) => {
           style={styles.inputAddress}
           autoCapitalize="none"
           label="Votre adresse"
-          value={user?.walletAddress?.address}
-          onChangeText={text => setAddress(text)}
+          value={address}
           right={<TextInput.Icon name="clipboard" />}
         />
       </View>

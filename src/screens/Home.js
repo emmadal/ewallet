@@ -24,6 +24,7 @@ import {RenderEmpty} from '../components/RenderEmpty';
 
 const Home = ({theme}) => {
   const [hideAmount, setHideAmount] = useState(false);
+  const [action, setAction] = useState('');
   const [checked, setChecked] = useState('XOF');
   const [showModal, setModal] = useState(false);
   const [seletedAccount, setSeletedAccount] = useState(0);
@@ -50,14 +51,25 @@ const Home = ({theme}) => {
     [openOptions],
   );
 
-  const toggleBottomSheet = () => {
+  const toggleBottomSheet = useCallback(() => {
+    setAction('accounts');
     if (openOptions) {
       bottomSheetRef.current?.close();
     } else {
       bottomSheetRef.current?.expand();
     }
     setOptions(!openOptions);
-  };
+  }, [openOptions]);
+
+  const toggleBottomSheetType = useCallback(() => {
+    setAction('type');
+    if (openOptions) {
+      bottomSheetRef.current?.close();
+    } else {
+      bottomSheetRef.current?.expand();
+    }
+    setOptions(!openOptions);
+  }, [openOptions]);
 
   const selectAccount = e => {
     setChecked(e?.currencyIsoCode);
@@ -160,7 +172,11 @@ const Home = ({theme}) => {
                     user?.accounts[seletedAccount]?.address?.final_balance
                   } ${user?.accounts[seletedAccount]?.currencyIsoCode}`}{' '}
               <Icon
-                name={openOptions ? 'chevron-up' : 'chevron-down'}
+                name={
+                  openOptions && action === 'accounts'
+                    ? 'chevron-up'
+                    : 'chevron-down'
+                }
                 size={23}
                 color={colors.white}
               />
@@ -190,24 +206,12 @@ const Home = ({theme}) => {
               contentStyle={styles.contentStyle}
               mode="contained"
               onPress={() =>
-                user?.isActive ? navigate('Deposit') : setModal(!showModal)
+                user?.isActive ? toggleBottomSheetType() : setModal(!showModal)
               }
               theme={{roundness: 10}}
             />
             <Text style={styles.btnText}>Dépot</Text>
           </View>
-          {/* <View style={styles.btn}>
-            <Button
-              compact={true}
-              contentStyle={styles.contentStyle}
-              icon="arrow-bottom-right"
-              labelStyle={styles.labelStyle}
-              mode="contained"
-              onPress={() => navigate('WithDrawal')}
-              theme={{roundness: 10}}
-            />
-            <Text style={styles.btnText}>Retrait</Text>
-          </View> */}
           <View style={styles.btn}>
             <Button
               icon="sync"
@@ -240,9 +244,30 @@ const Home = ({theme}) => {
         onChange={handleSheetChanges}
         snapPoints={snapPoints}>
         <BottomSheetFlatList
-          data={user?.accounts}
+          data={
+            action === 'accounts'
+              ? user?.accounts
+              : [
+                  {id: 1, label: 'Acheter'},
+                  {id: 2, label: 'Recevoir'},
+                ]
+          }
           keyExtractor={i => i.id}
-          renderItem={renderItem}
+          renderItem={
+            action === 'accounts'
+              ? renderItem
+              : ({item}) => (
+                  <TouchableOpacity
+                    style={styles.sheetType}
+                    onPress={() =>
+                      item?.label === 'Acheter'
+                        ? navigate('Deposit')
+                        : navigate('Request')
+                    }>
+                    <Title>{item.label}</Title>
+                  </TouchableOpacity>
+                )
+          }
           contentContainerStyle={styles.contentContainer}
         />
       </BottomSheet>
@@ -259,6 +284,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#44bd32',
     paddingTop: Platform.OS === 'ios' ? 75 : 30,
     paddingBottom: 30,
+  },
+  sheetType: {
+    margin: 15,
   },
   btn: {
     flexDirection: 'column',

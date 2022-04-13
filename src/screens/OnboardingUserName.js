@@ -22,6 +22,7 @@ const OnboardingUserName = ({theme, route}) => {
         password,
         fullName: name,
         phone: route.params.phoneNumber,
+        country: route.params.country,
       };
       const res = await register(userData);
       if (res) {
@@ -30,7 +31,6 @@ const OnboardingUserName = ({theme, route}) => {
       }
     } catch (error) {
       Alert.alert(error.message);
-      console.log(error.message);
       setLoading(false);
       return;
     }
